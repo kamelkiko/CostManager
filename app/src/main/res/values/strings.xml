@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Cost Manager</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="ranks">Rank</string>
+    <string name="favourite">Favourite</string>
+    <string name="fab">fab</string>
+    <string name="logo">logo</string>
+    <string name="popular_places_in_the_world">Popular places in the world</string>
+    <string name="all_search_is_easy_here">All search is easy here</string>
+    <string name="you_can_find_your_city_here">You can find your city here</string>
+    <string name="the_world_is_a_vast_and_beautiful_place_filled_with_fascinating_sights_and_experiences_from_natural_wonders_to_historic_landmarks_there_are_countless_popular_places_around_the_globe_that_attract_millions_of_visitors_every_year">The world is a vast and beautiful place, filled with fascinating sights and experiences. From natural wonders to historic landmarks, there are countless popular places around the globe that attract millions of visitors every year.</string>
+    <string name="ultimately_finding_your_city_is_all_about_exploring_and_getting_to_know_the_area_with_the_right_resources_and_a_little_bit_of_patience_you_can_discover_everything_your_new_home_has_to_offer_and_make_it_a_place_you_ll_love_for_years_to_come_so_don_t_be_afraid_to_start_your_search_today_you_might_just_find_your_dream_city_right_around_the_corner">Ultimately, finding your city is all about exploring and getting to know the area. With the right resources and a little bit of patience, you can discover everything your new home has to offer and make it a place you\'ll love for years to come. So don\'t be afraid to start your search today - you might just find your dream city right around the corner.</string>
+    <string name="our_application_is_a_comprehensive_solution_for_all_your_needs_whether_you_are_looking_for_a_platform_to_connect_with_your_friends_and_family_or_an_app_to_help_you_organize_your_daily_routine_our_application_has_got_you_covered_it_is_a_one_stop_solution_for_all_your_needs">Our application is a comprehensive solution for all your needs. Whether you are looking for a platform to connect with your friends and family or an app to help you organize your daily routine, our application has got you covered. It is a one-stop solution for all your needs.</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="do_not_have_an_account">Do not have an account?</string>
+    <string name="do_you_have_an_account">Do you have an account?</string>
+    <string name="signup">SignUp</string>
+    <string name="username">UserName</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_here">Search here</string>
+</resources>

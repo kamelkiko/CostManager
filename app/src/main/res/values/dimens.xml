@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="nav_bottom_height">80dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="elevation_small">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="progress_bar_size">80dp</dimen>
+    <dimen name="margin_x_large">24dp</dimen>
+    <dimen name="dots_space">4dp</dimen>
+    <dimen name="dots_size">16dp</dimen>
+    <dimen name="medium_radius">8dp</dimen>
+    <dimen name="text_x_large">18sp</dimen>
+    <dimen name="big_image">228dp</dimen>
+    <dimen name="text_medium">14sp</dimen>
+    <dimen name="text_large">16sp</dimen>
+    <dimen name="title_text_size">28sp</dimen>
+    <dimen name="long_height">58dp</dimen>
+    <dimen name="app_bar_height">56dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+</resources>

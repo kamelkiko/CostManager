@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FAFAFA</color>
+    <color name="white">#1C1B1F</color>
+    <color name="base">#B73B67</color>
+    <color name="light_black">#5EFAFAFA</color>
+    <color name="medium_black">#99FAFAFA</color>
+    <color name="dark_black">#DEFAFAFA</color>
+    <color name="arrow_color">#A42351</color>
+    <color name="selected_dots_color">#A42351</color>
+    <color name="un_selected_dots_color">#5EA42351</color>
+    <color name="dark_white">#DE121212</color>
+    <color name="hint_Color">#61FAFAFA</color>
+    <color name="pressed_color">#5EB73B67</color>
+    <color name="stroke_app_bar">#1AFAFAFA</color>
+    <color name="just_white">#FAFAFA</color>
+    <color name="just_black">#1C1B1F</color>
+    <color name="stroke_search_view">#29FAFAFA</color>
+    <color name="search_color">#1E1E1E</color>
+</resources>
