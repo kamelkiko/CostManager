@@ -1,6 +1,5 @@
 package com.kiko.costmanager.logic.ui.onboarding
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.FragmentOnBoardingBinding
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
-import com.kiko.costmanager.logic.ui.onboarding.adapter.ViewPagerAdapter
 import com.kiko.costmanager.logic.ui.login.LoginFragment
-import com.kiko.costmanager.logic.util.Constants
+import com.kiko.costmanager.logic.ui.onboarding.adapter.ViewPagerAdapter
+import com.kiko.costmanager.logic.util.PrefsUtil
 
 class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentOnBoardingBinding
@@ -76,12 +75,8 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     }
 
     private fun finishOnBoarding() {
-        val sharedPreferences =
-            activity?.getSharedPreferences(Constants.ON_BOARDING_SHARED_PREF, Context.MODE_PRIVATE)
-        sharedPreferences?.edit()?.apply {
-            putBoolean(Constants.FINISH_ON_BOARDING, true)
-            apply()
-        }
+        PrefsUtil.initPrefsUtil(requireActivity())
+        PrefsUtil.onBoardingFinish = true
     }
 
 }

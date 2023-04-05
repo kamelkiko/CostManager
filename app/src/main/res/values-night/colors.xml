@@ -17,4 +17,5 @@
     <color name="just_black">#1C1B1F</color>
     <color name="stroke_search_view">#29FAFAFA</color>
     <color name="search_color">#1E1E1E</color>
+    <color name="rank_card_background">#2B2831</color>
 </resources>

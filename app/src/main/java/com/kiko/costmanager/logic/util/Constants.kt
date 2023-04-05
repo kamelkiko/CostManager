@@ -55,11 +55,15 @@ object Constants {
         const val DATA_QUALITY = 57
     }
 
+    object ImageUrl {
+        const val RANDOM_IMAGE_URL = "https://source.unsplash.com/random/1080%C3%97975/?city"
+    }
+
     const val ON_BOARDING_SHARED_PREF = "ON_BOARDING_SHARED_PREF"
     const val SIGNUP_SHARED_PREF = "SIGNUP_SHARED_PREF"
     const val FINISH_ON_BOARDING = "FINISH_ON_BOARDING"
     const val EMAIL = "EMAIL"
     const val USERNAME = "USERNAME"
     const val PASSWORD = "PASSWORD"
-    const val IMAGE_URL = "https://source.unsplash.com/random/1080%C3%97975/?city"
+
 }

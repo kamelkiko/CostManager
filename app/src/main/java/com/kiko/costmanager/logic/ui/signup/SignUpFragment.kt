@@ -1,6 +1,5 @@
 package com.kiko.costmanager.logic.ui.signup
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,10 @@ import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.fragment.app.commit
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.FragmentSignUpBinding
-import com.kiko.costmanager.logic.ui.home.HomeFragment
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
 import com.kiko.costmanager.logic.ui.Base.HomeActivity
-import com.kiko.costmanager.logic.util.Constants
+import com.kiko.costmanager.logic.ui.home.HomeFragment
+import com.kiko.costmanager.logic.util.PrefsUtil
 
 
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
@@ -39,17 +38,13 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
     private fun saveUser() {
         if (validate()) {
-            val sharedPreferences =
-                activity?.getSharedPreferences(Constants.SIGNUP_SHARED_PREF, Context.MODE_PRIVATE)
+            PrefsUtil.initPrefsUtil(requireActivity())
             val email = binding.editTextEmail.text.toString()
             val userName = binding.editTextUsername.text.toString()
             val password = binding.editTextPassword.text.toString()
-            val edit = sharedPreferences?.edit()
-            edit?.let {
-                it.putString(Constants.EMAIL, email)
-                it.putString(Constants.USERNAME, userName)
-                it.putString(Constants.PASSWORD, password)
-            }?.apply()
+            PrefsUtil.userEmail = email
+            PrefsUtil.userName = userName
+            PrefsUtil.userPassword = password
             toHome()
         } else
             Toast.makeText(requireContext(), "You should fill all inputs", Toast.LENGTH_SHORT)

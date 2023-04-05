@@ -8,7 +8,7 @@ class CsvParser {
         val tokens = line.split(",")
         return CityEntity(
             cityName = tokens[Constants.ColumnIndex.CITY],
-            image = Constants.IMAGE_URL,
+            image = Constants.ImageUrl.RANDOM_IMAGE_URL,
             country = tokens[Constants.ColumnIndex.COUNTRY],
             mealsPrices = constructMealsPricesFromTokens(tokens),
             drinksPrices = constructDrinksPricesFromTokens(tokens),

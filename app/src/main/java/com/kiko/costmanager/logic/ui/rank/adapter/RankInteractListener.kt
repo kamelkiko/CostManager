@@ -1,7 +1,7 @@
 package com.kiko.costmanager.logic.ui.rank.adapter
 
-import com.kiko.costmanager.logic.data.models.CityEntity
+import com.kiko.costmanager.logic.data.models.Category
 
 interface RankInteractListener {
-    fun onClickItem(cityEntity: CityEntity)
+    fun onClickItem(category: Category)
 }

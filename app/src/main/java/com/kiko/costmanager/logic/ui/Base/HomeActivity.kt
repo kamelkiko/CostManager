@@ -1,7 +1,6 @@
 package com.kiko.costmanager.logic.ui.Base
 
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,49 +9,54 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.ActivityHomeBinding
-import com.kiko.costmanager.logic.data.dataSource.CsvDataSource
-import com.kiko.costmanager.logic.data.dataSource.DataSourceImpl
-import com.kiko.costmanager.logic.data.dataSource.DataSourceProvider
+import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.ui.home.HomeFragment
 import com.kiko.costmanager.logic.ui.login.LoginFragment
 import com.kiko.costmanager.logic.ui.onboarding.OnBoardingFragment
 import com.kiko.costmanager.logic.ui.rank.RankFragment
-import com.kiko.costmanager.logic.util.Constants
 import com.kiko.costmanager.logic.util.CsvParser
+import com.kiko.costmanager.logic.util.PrefsUtil
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var dataSourceProvider: DataSourceProvider
     override fun onCreate(savedInstanceState: Bundle?) {
-        initDataManager(savedInstanceState)
         super.onCreate(savedInstanceState)
         installSplashScreen()
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        PrefsUtil.initPrefsUtil(this)
         setup()
         addCallBack()
     }
 
     private fun setup() {
         getSharedPrefOnBoarding()
+        openAndParseFile()
+    }
+
+    private fun openAndParseFile() {
+        val inputStream = this.assets.open(FILE_NAME)
+        val buffer = BufferedReader(InputStreamReader(inputStream))
+        val csvParser = CsvParser()
+        buffer.forEachLine {
+            val city = csvParser.parseLine(it)
+            DataManager.addCity(city)
+        }
     }
 
     private fun getSharedPrefOnBoarding() {
-        val sharedPreferences =
-            getSharedPreferences(Constants.ON_BOARDING_SHARED_PREF, Context.MODE_PRIVATE)
-        val isOnBoardingFinished =
-            sharedPreferences.getBoolean(Constants.FINISH_ON_BOARDING, false)
-        if (isOnBoardingFinished) getSharedPrefUser()
+        val isOnBoardingFinished = PrefsUtil.onBoardingFinish
+        if (isOnBoardingFinished!!) getSharedPrefUser()
         else showOnBoarding()
     }
 
     private fun getSharedPrefUser() {
-        val sharedPreferences =
-            getSharedPreferences(Constants.SIGNUP_SHARED_PREF, Context.MODE_PRIVATE)
-        val email = sharedPreferences.getString(Constants.EMAIL, "")
-        val userName = sharedPreferences.getString(Constants.USERNAME, "")
-        val password = sharedPreferences.getString(Constants.PASSWORD, "")
+        val email = PrefsUtil.userEmail
+        val userName = PrefsUtil.userName
+        val password = PrefsUtil.userPassword
         if (email != "" && userName != "" && password != "")
             showHome()
         else
@@ -119,22 +123,7 @@ class HomeActivity : AppCompatActivity() {
             binding.navBottom.visibility = View.GONE
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(KEY_DATA_MANAGER, dataSourceProvider)
-    }
-
-
-    private fun initDataManager(savedInstanceState: Bundle?) {
-        dataSourceProvider = when (savedInstanceState) {
-            null -> DataSourceImpl(CsvDataSource(CsvParser(), this))
-            else -> savedInstanceState.getSerializable(KEY_DATA_MANAGER) as DataSourceProvider
-        }
-    }
-
-    fun getDataSource() = dataSourceProvider
-
     companion object {
-        const val KEY_DATA_MANAGER = "DATA_MANAGER"
+        private const val FILE_NAME = "costOfLiving.csv"
     }
 }
