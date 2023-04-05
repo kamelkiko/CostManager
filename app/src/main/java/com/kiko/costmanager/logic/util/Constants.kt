@@ -57,13 +57,10 @@ object Constants {
 
     object ImageUrl {
         const val RANDOM_IMAGE_URL = "https://source.unsplash.com/random/1080%C3%97975/?city"
+        const val MEALS =
+            "https://images.unsplash.com/photo-1615917124838-1af8a2aaae09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+        const val FOODS =
+            "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=449&q=80"
     }
-
-    const val ON_BOARDING_SHARED_PREF = "ON_BOARDING_SHARED_PREF"
-    const val SIGNUP_SHARED_PREF = "SIGNUP_SHARED_PREF"
-    const val FINISH_ON_BOARDING = "FINISH_ON_BOARDING"
-    const val EMAIL = "EMAIL"
-    const val USERNAME = "USERNAME"
-    const val PASSWORD = "PASSWORD"
 
 }

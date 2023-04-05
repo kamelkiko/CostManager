@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.fragment.app.commit
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.ActivityHomeBinding
@@ -14,6 +14,7 @@ import com.kiko.costmanager.logic.ui.home.HomeFragment
 import com.kiko.costmanager.logic.ui.login.LoginFragment
 import com.kiko.costmanager.logic.ui.onboarding.OnBoardingFragment
 import com.kiko.costmanager.logic.ui.rank.RankFragment
+import com.kiko.costmanager.logic.ui.search.SearchFragment
 import com.kiko.costmanager.logic.util.CsvParser
 import com.kiko.costmanager.logic.util.PrefsUtil
 import java.io.BufferedReader
@@ -30,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
         PrefsUtil.initPrefsUtil(this)
         setup()
         addCallBack()
+        binding.navBottom.selectedItemId = R.id.nav_home
     }
 
     private fun setup() {
@@ -79,7 +81,6 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showHome() {
         bottomNavView(true)
-        binding.navBottom.selectedItemId = R.id.nav_home
         supportFragmentManager.commitNow {
             replace(R.id.fragment_container, HomeFragment())
             setReorderingAllowed(true)
@@ -90,20 +91,15 @@ class HomeActivity : AppCompatActivity() {
         binding.navBottom.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    supportFragmentManager.commit {
-                        replace(R.id.fragment_container, HomeFragment())
-                        setReorderingAllowed(true)
-                    }
+                    setFragment(HomeFragment(), TAG_HOME_FRAGMENT)
                     true
                 }
                 R.id.nav_search -> {
+                    setFragment(SearchFragment(), TAG_SEARCH_FRAGMENT)
                     true
                 }
                 R.id.nav_ranks -> {
-                    supportFragmentManager.commit {
-                        replace(R.id.fragment_container, RankFragment())
-                        setReorderingAllowed(true)
-                    }
+                    setFragment(RankFragment(), TAG_RANK_FRAGMENT)
                     true
                 }
                 R.id.nav_favourite -> {
@@ -116,6 +112,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun setFragment(fragment: Fragment, tag: String) {
+        val currentFragment = supportFragmentManager.findFragmentById(binding.fragmentContainer.id)
+        if (currentFragment == null || currentFragment.javaClass != fragment.javaClass)
+            supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, fragment, tag)
+                .commit()
+    }
+
     fun bottomNavView(visible: Boolean) {
         if (visible)
             binding.navBottom.visibility = View.VISIBLE
@@ -125,5 +129,14 @@ class HomeActivity : AppCompatActivity() {
 
     companion object {
         private const val FILE_NAME = "costOfLiving.csv"
+        const val TAG_HOME_FRAGMENT = "Home"
+        const val TAG_RANK_FRAGMENT = "Rank"
+        const val TAG_SEARCH_FRAGMENT = "Search"
+        const val TAG_PROFILE_FRAGMENT = "Profile"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        DataManager.clearCity()
     }
 }

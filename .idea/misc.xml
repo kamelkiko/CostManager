@@ -33,12 +33,14 @@
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_login.xml" value="0.136" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_on_boarding.xml" value="0.16" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_rank.xml" value="0.152" />
+        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_search.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_second.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_second_page.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_sign_up.xml" value="0.128" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_third.xml" value="0.12" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_third_page.xml" value="0.15789473684210525" />
-        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/item_rank.xml" value="0.12" />
+        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/item_rank.xml" value="0.136" />
+        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/item_search.xml" value="0.15723684210526315" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/splash_screen.xml" value="0.25" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/menu/nav_item.xml" value="0.25" />
       </map>

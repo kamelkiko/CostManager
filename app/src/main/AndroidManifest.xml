@@ -18,7 +18,9 @@
         <activity
             android:name=".logic.ui.Base.HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.MyApp.MySplash">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyApp.MySplash"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

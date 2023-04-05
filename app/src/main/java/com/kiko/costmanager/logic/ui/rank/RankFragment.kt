@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import com.airbnb.lottie.LottieDrawable
+import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.FragmentRankBinding
 import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.data.models.Category
@@ -19,27 +21,52 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
         get() = FragmentRankBinding::inflate
     private lateinit var adapter: RankAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUp()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUp()
         addCallBack()
     }
 
     private fun addCallBack() {
+        binding.recycleRank.adapter = adapter
         binding.editTextSearch.doAfterTextChanged {
             val searchedCategories = DataManager.searchInCategory(it.toString())
-            adapter.setData(searchedCategories)
-            binding.recycleRank.scrollToPosition(0)
+            if (searchedCategories.isNotEmpty()) {
+                hideAnimation()
+                adapter.setData(searchedCategories)
+                binding.recycleRank.scrollToPosition(0)
+            } else
+                showAnimation()
         }
 
     }
 
     private fun setUp() {
         adapter = RankAdapter(DataManager.getAllCategory(), this)
-        binding.recycleRank.adapter = adapter
     }
 
     override fun onClickItem(category: Category) {
         Toast.makeText(requireContext(), category.categoryName, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showAnimation() {
+        binding.apply {
+            lottie.visibility = View.VISIBLE
+            lottie.setAnimation(R.raw.not_found)
+            lottie.repeatCount = LottieDrawable.INFINITE
+            lottie.playAnimation()
+            binding.recycleRank.visibility = View.GONE
+        }
+    }
+
+    private fun hideAnimation() {
+        binding.apply {
+            recycleRank.visibility = View.VISIBLE
+            lottie.visibility = View.GONE
+        }
     }
 }
