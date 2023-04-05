@@ -58,15 +58,15 @@
         tools:text="food" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_favourite"
+        android:id="@+id/btn_logout"
         android:layout_width="0dp"
         android:layout_height="@dimen/long_height"
         android:layout_marginHorizontal="@dimen/margin_x_large"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/lato_bold"
         android:gravity="center"
-        android:text="@string/favourite"
+        android:text="@string/logout"
         android:textAllCaps="false"
         android:textColor="@color/just_white"
         android:textSize="@dimen/text_large"
@@ -76,29 +76,11 @@
         app:layout_constraintTop_toBottomOf="@id/text_view_name" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_logout"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/long_height"
-        android:layout_marginHorizontal="@dimen/margin_x_large"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/btn_background_outline"
-        android:fontFamily="@font/lato_bold"
-        android:gravity="center"
-        android:text="@string/logout"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_large"
-        app:iconGravity="start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_favourite" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_delete"
         android:layout_width="0dp"
         android:layout_height="@dimen/long_height"
         android:layout_marginHorizontal="@dimen/margin_x_large"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
         android:background="@drawable/btn_background_outline"
         android:fontFamily="@font/lato_bold"
         android:gravity="center"
