@@ -51,4 +51,10 @@ object DataManager {
         getAllCategory().filter {
             it.categoryName.lowercase().contains(categoryName.lowercase())
         }.toList()
+
+    fun search(name: String) =
+        getAllCitiesData().filter {
+            it.cityName.lowercase().contains(name.lowercase()) ||
+                    it.country.lowercase().contains(name.lowercase())
+        }
 }

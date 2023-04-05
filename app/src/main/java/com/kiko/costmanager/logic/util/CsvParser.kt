@@ -4,9 +4,10 @@ import com.kiko.costmanager.logic.data.models.*
 
 class CsvParser {
 
-    fun parseLine(line: String): CityEntity {
+    fun parseLine(id: Int, line: String): CityEntity {
         val tokens = line.split(",")
         return CityEntity(
+            id = id,
             cityName = tokens[Constants.ColumnIndex.CITY],
             image = Constants.ImageUrl.RANDOM_IMAGE_URL,
             country = tokens[Constants.ColumnIndex.COUNTRY],
@@ -21,6 +22,7 @@ class CsvParser {
             realEstatesPrices = constructRealStatesPricesFromTokens(tokens),
             averageMonthlyNetSalaryAfterTax = tokens[Constants.ColumnIndex.AVERAGE_MONTHLY_NET_SALARY_AFTER_TAX].toFloatOrNull(),
             dataQuality = tokens[Constants.ColumnIndex.DATA_QUALITY].toIntOrNull() == 1,
+            isFavourite = false,
         )
     }
 

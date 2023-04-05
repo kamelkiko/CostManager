@@ -1,5 +1,9 @@
 package com.kiko.costmanager.logic.data.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class FruitAndVegetablesPrices(
     val apples1kg: Float?,
     val banana1kg: Float?,
@@ -8,4 +12,4 @@ data class FruitAndVegetablesPrices(
     val potato1kg: Float?,
     val onion1kg: Float?,
     val lettuceOneHead: Float?,
-)
+) : Parcelable

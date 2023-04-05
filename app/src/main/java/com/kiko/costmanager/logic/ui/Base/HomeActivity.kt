@@ -45,8 +45,9 @@ class HomeActivity : AppCompatActivity() {
         val inputStream = this.assets.open(FILE_NAME)
         val buffer = BufferedReader(InputStreamReader(inputStream))
         val csvParser = CsvParser()
+        var id = 0
         buffer.forEachLine {
-            val city = csvParser.parseLine(it)
+            val city = csvParser.parseLine(++id, it)
             DataManager.addCity(city)
         }
     }

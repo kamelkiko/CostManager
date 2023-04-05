@@ -1,5 +1,9 @@
 package com.kiko.costmanager.logic.data.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class TransportationsPrices(
     val oneWayTicketLocalTransport: Float?,
     val monthlyPassRegularPrice: Float?,
@@ -7,4 +11,4 @@ data class TransportationsPrices(
     val taxi1kmNormalTariff: Float?,
     val taxi1hourWaitingNormalTariff: Float?,
     val gasolineOneLiter: Float?,
-)
+) : Parcelable

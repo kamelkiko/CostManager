@@ -56,7 +56,7 @@ object Constants {
     }
 
     object ImageUrl {
-        const val RANDOM_IMAGE_URL = "https://source.unsplash.com/random/1080%C3%97975/?city"
+        const val RANDOM_IMAGE_URL = "https://source.unsplash.com/random/1080×975/?city"
         const val MEALS =
             "https://images.unsplash.com/photo-1615917124838-1af8a2aaae09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
         const val DRINKS =

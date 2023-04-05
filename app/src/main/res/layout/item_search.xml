@@ -15,15 +15,27 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/img_favourite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="@dimen/margin_medium"
+            android:contentDescription="@string/logo"
+            android:elevation="@dimen/elevation_small"
+            android:src="@drawable/ic_heart_outlined"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseAppTint" />
+
+        <ImageView
             android:id="@+id/image_search"
             android:layout_width="0dp"
             android:layout_height="256dp"
             android:contentDescription="@string/login"
             android:scaleType="fitXY"
-            android:src="@drawable/paris"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/paris" />
 
         <TextView
             android:id="@+id/text_city_name"

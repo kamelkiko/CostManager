@@ -45,6 +45,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_large"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,9 +57,10 @@
         android:id="@+id/lottie"
         android:layout_width="256dp"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text_search" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
