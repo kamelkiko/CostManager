@@ -23,7 +23,7 @@
     <string name="search_here">Search here</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
-    <string name="delete">Delete</string>
+    <string name="delete">Delete your account</string>
     <string name="you_need_support_contact_us">You need support? Contact Us</string>
     <string name="here_you_can_add_your_favourite_recieps">Here you can add your favourite cities</string>
 </resources>

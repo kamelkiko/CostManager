@@ -1,5 +1,6 @@
 package com.kiko.costmanager.logic.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 
@@ -12,6 +13,13 @@ object PrefsUtil {
     private const val KEY_FINISH = "keyFinish"
     fun initPrefsUtil(context: Context) {
         sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun clearAccount() {
+        sharedPreferences?.edit()?.remove(KEY_USERNAME)?.apply()
+        sharedPreferences?.edit()?.remove(KEY_EMAIL)?.apply()
+        sharedPreferences?.edit()?.remove(KEY_PASSWORD)?.apply()
     }
 
     var userName: String?
