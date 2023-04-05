@@ -12,6 +12,7 @@ import com.kiko.costmanager.databinding.FragmentRankBinding
 import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.data.models.Category
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
+import com.kiko.costmanager.logic.ui.Base.HomeActivity
 import com.kiko.costmanager.logic.ui.rank.adapter.RankAdapter
 import com.kiko.costmanager.logic.ui.rank.adapter.RankInteractListener
 
@@ -46,6 +47,7 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
     }
 
     private fun setUp() {
+        (activity as HomeActivity).bottomNavView(true)
         adapter = RankAdapter(DataManager.getAllCategory(), this)
     }
 

@@ -9,6 +9,7 @@ import com.kiko.costmanager.databinding.FragmentSearchBinding
 import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.data.models.CityEntity
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
+import com.kiko.costmanager.logic.ui.Base.HomeActivity
 import com.kiko.costmanager.logic.ui.search.adapter.SearchAdapter
 import com.kiko.costmanager.logic.ui.search.adapter.SearchInteractListener
 
@@ -20,6 +21,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchInteractList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setup()
+    }
+
+    private fun setup() {
+        (activity as HomeActivity).bottomNavView(true)
         val adapter = SearchAdapter(DataManager.getAllCitiesData().take(10), this)
         binding.recycleSearch.adapter = adapter
     }
