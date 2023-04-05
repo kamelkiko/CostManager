@@ -10,7 +10,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/rank_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="256dp"
         android:scaleType="fitXY"
         android:src="@drawable/search_city"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +21,7 @@
     <EditText
         android:id="@+id/edit_text_search"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_large"
         android:autofillHints="name"
         android:background="@drawable/search_view"
@@ -30,6 +30,7 @@
         android:fontFamily="@font/lato"
         android:hint="@string/search_here"
         android:inputType="text"
+        android:padding="@dimen/padding_large"
         android:paddingStart="@dimen/padding_large"
         android:textColor="@color/black"
         android:textColorHint="@color/black"

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.ActivityHomeBinding
@@ -13,6 +14,7 @@ import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.ui.home.HomeFragment
 import com.kiko.costmanager.logic.ui.login.LoginFragment
 import com.kiko.costmanager.logic.ui.onboarding.OnBoardingFragment
+import com.kiko.costmanager.logic.ui.profile.ProfileFragment
 import com.kiko.costmanager.logic.ui.rank.RankFragment
 import com.kiko.costmanager.logic.ui.search.SearchFragment
 import com.kiko.costmanager.logic.util.CsvParser
@@ -29,14 +31,14 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         PrefsUtil.initPrefsUtil(this)
-        setup()
+//        setup()
+        showHome()
         addCallBack()
         binding.navBottom.selectedItemId = R.id.nav_home
     }
 
     private fun setup() {
         getSharedPrefOnBoarding()
-        openAndParseFile()
     }
 
     private fun openAndParseFile() {
@@ -66,20 +68,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showOnBoarding() {
-        supportFragmentManager.commitNow {
+        supportFragmentManager.commit {
             replace(R.id.fragment_container, OnBoardingFragment())
             setReorderingAllowed(true)
         }
     }
 
     private fun showLogIn() {
-        supportFragmentManager.commitNow {
+        supportFragmentManager.commit {
             replace(R.id.fragment_container, LoginFragment())
             setReorderingAllowed(true)
         }
     }
 
     private fun showHome() {
+        openAndParseFile()
         bottomNavView(true)
         supportFragmentManager.commitNow {
             replace(R.id.fragment_container, HomeFragment())
@@ -102,7 +105,8 @@ class HomeActivity : AppCompatActivity() {
                     setFragment(RankFragment(), TAG_RANK_FRAGMENT)
                     true
                 }
-                R.id.nav_favourite -> {
+                R.id.nav_profile -> {
+                    setFragment(ProfileFragment(), TAG_PROFILE_FRAGMENT)
                     true
                 }
                 else -> {

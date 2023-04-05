@@ -20,15 +20,15 @@ object DataManager {
         return listOf(
             Category(0, "Meals", Constants.ImageUrl.MEALS),
             Category(1, "Drinks", Constants.ImageUrl.DRINKS),
-            Category(2, "Fruits", Constants.ImageUrl.RANDOM_IMAGE_URL),
+            Category(2, "Fruits", Constants.ImageUrl.FRUITS),
             Category(3, "Foods", Constants.ImageUrl.FOODS),
-            Category(4, "Service", Constants.ImageUrl.RANDOM_IMAGE_URL),
-            Category(5, "Clothes", Constants.ImageUrl.RANDOM_IMAGE_URL),
-            Category(6, "Transportations", Constants.ImageUrl.RANDOM_IMAGE_URL),
-            Category(7, "Cars", Constants.ImageUrl.RANDOM_IMAGE_URL),
-            Category(8, "RealEstates", Constants.ImageUrl.RANDOM_IMAGE_URL),
+            Category(4, "Service", Constants.ImageUrl.SERVICES),
+            Category(5, "Clothes", Constants.ImageUrl.CLOTHES),
+            Category(6, "Transportations", Constants.ImageUrl.TRANSPORTATIONS),
+            Category(7, "Cars", Constants.ImageUrl.CARS),
+            Category(8, "RealEstates", Constants.ImageUrl.REAL_STATES),
             Category(9, "Salaries", Constants.ImageUrl.SALARIES),
-            Category(10, "Internet", Constants.ImageUrl.RANDOM_IMAGE_URL),
+            Category(10, "Internet", Constants.ImageUrl.INTERNET),
         )
     }
 

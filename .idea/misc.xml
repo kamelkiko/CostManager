@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/drawable-hdpi/btn_background_outline.xml" value="0.104" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/drawable-v24/ic_back_black.xml" value="0.104" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/drawable-v24/ic_heart.xml" value="0.104" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/drawable/btn_background.xml" value="0.104" />
@@ -31,7 +32,8 @@
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_first_page.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_home.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_login.xml" value="0.136" />
-        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_on_boarding.xml" value="0.16" />
+        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_on_boarding.xml" value="0.144" />
+        <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_profile.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_rank.xml" value="0.152" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_search.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/kikok/AndroidStudioProjects/CostManager/app/src/main/res/layout/fragment_second.xml" value="0.15789473684210525" />
@@ -46,7 +48,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
