@@ -6,23 +6,8 @@ import com.kiko.costmanager.logic.util.Constants
 
 object DataManager {
     private val cities = mutableListOf<CityEntity>()
-    private val favouriteCities = mutableListOf<CityEntity>()
     fun addCity(cityEntity: CityEntity) {
         cities.add(cityEntity)
-    }
-
-    fun addFavouriteCity(cityEntity: CityEntity) {
-        favouriteCities.add(cityEntity)
-    }
-
-    fun deleteFavouriteCity(index: Int) {
-        favouriteCities.removeAt(index)
-    }
-
-    fun getAllFavouritesCity() = favouriteCities
-
-    fun clearFavouriteCity() {
-        favouriteCities.clear()
     }
 
     fun clearCity() {

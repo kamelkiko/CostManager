@@ -6,12 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.commit
-import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.FragmentProfileBinding
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
 import com.kiko.costmanager.logic.ui.Base.HomeActivity
-import com.kiko.costmanager.logic.ui.favourite.FavouriteFragment
 import com.kiko.costmanager.logic.util.PrefsUtil
 
 
@@ -35,14 +32,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun addCallBacks() {
-        binding.btnFavourite.setOnClickListener {
-            parentFragmentManager.commit {
-                replace(R.id.fragment_container, FavouriteFragment())
-                addToBackStack(null)
-                setReorderingAllowed(true)
-                (activity as HomeActivity).bottomNavView(false)
-            }
-        }
         binding.textViewContactus.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(MY_FACE_ACCOUNT)

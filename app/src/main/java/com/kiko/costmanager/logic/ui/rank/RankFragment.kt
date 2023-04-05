@@ -58,7 +58,7 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
     private fun showAnimation() {
         binding.apply {
             lottie.visibility = View.VISIBLE
-            lottie.setAnimation(R.raw.search)
+            lottie.setAnimation(R.raw.not_found)
             lottie.repeatCount = LottieDrawable.INFINITE
             lottie.playAnimation()
             binding.recycleRank.visibility = View.GONE

@@ -24,37 +24,41 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchInteractList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup()
-        showAnimation()
         addCallBack()
     }
 
     private fun addCallBack() {
+        binding.recycleSearch.adapter = adapter
         binding.editTextSearch.doAfterTextChanged {
-            if (it.isNullOrEmpty())
-                showAnimation()
             val search = DataManager.search(it.toString())
             if (search.isNotEmpty()) {
+                hideAnimation()
                 adapter.setData(search)
                 binding.recycleSearch.scrollToPosition(0)
-                hideAnimation()
-            }
+            } else
+                showAnimationError()
         }
 
+    }
+
+    private fun showAnimationError() {
+        binding.apply {
+            lottie.visibility = View.VISIBLE
+            lottie.setAnimation(R.raw.not_found)
+            lottie.repeatCount = LottieDrawable.INFINITE
+            lottie.playAnimation()
+            binding.recycleSearch.visibility = View.GONE
+        }
     }
 
     private fun setup() {
         (activity as HomeActivity).bottomNavView(true)
         adapter = SearchAdapter(emptyList(), this)
-        binding.recycleSearch.adapter = adapter
+        showAnimation()
     }
 
     override fun onClickItem(cityEntity: CityEntity) {
         Toast.makeText(requireContext(), cityEntity.cityName, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onClickFavouriteLogo(cityEntity: CityEntity) {
-        DataManager.addFavouriteCity(cityEntity)
-        Toast.makeText(requireContext(), "Added!", Toast.LENGTH_SHORT).show()
     }
 
     private fun showAnimation() {
