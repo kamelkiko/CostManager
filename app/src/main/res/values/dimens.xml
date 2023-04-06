@@ -21,4 +21,13 @@
     <dimen name="app_bar_height">56dp</dimen>
     <dimen name="padding_medium">8dp</dimen>
     <dimen name="margin_small">4dp</dimen>
+    <dimen name="text_250">250dp</dimen>
+    <dimen name="text_300">300dp</dimen>
+    <dimen name="logo_image_128">128dp</dimen>
+    <dimen name="image_height_256">256dp</dimen>
+    <dimen name="corner_radius_12">12dp</dimen>
+    <dimen name="image_height_80">80dp</dimen>
+    <dimen name="corner_radius_8dp">8dp</dimen>
+    <dimen name="width_300dp">300dp</dimen>
+    <dimen name="margin_xx_large">32dp</dimen>
 </resources>

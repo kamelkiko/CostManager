@@ -49,7 +49,7 @@
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_large"
         android:fontFamily="@font/lato"
-        android:maxWidth="300dp"
+        android:maxWidth="@dimen/width_300dp"
         android:maxLines="6"
         android:text="@string/our_application_is_a_comprehensive_solution_for_all_your_needs_whether_you_are_looking_for_a_platform_to_connect_with_your_friends_and_family_or_an_app_to_help_you_organize_your_daily_routine_our_application_has_got_you_covered_it_is_a_one_stop_solution_for_all_your_needs"
         android:textColor="@color/medium_black"

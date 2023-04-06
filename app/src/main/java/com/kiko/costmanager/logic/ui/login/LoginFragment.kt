@@ -33,7 +33,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 setReorderingAllowed(true)
             }
         }
-        binding.btnLogin.setOnClickListener {
+        binding.buttonLogin.setOnClickListener {
             val userName = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
             if (userName.isNullOrEmpty() && password.isNullOrEmpty())
