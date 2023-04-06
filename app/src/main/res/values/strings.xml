@@ -28,4 +28,7 @@
     <string name="here_you_can_add_your_favourite_recieps">Here you can add your favourite cities</string>
     <string name="find_your_dream_city">Find Your Dream City</string>
     <string name="find_your_dream_city_rank">Find Your Dream City Rank</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="details">Details</string>
 </resources>

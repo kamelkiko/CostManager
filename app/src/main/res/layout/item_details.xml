@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_medium"
+    android:layout_marginBottom="@dimen/margin_large"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="@dimen/elevation_small">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_category"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/paris"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/logo" />
+
+        <TextView
+            android:id="@+id/text_view_average_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:fontFamily="@font/lato_bold"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:textSize="@dimen/text_large"
+           app:layout_constraintStart_toEndOf="@id/image_category"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="food" />
+
+        <TextView
+            android:id="@+id/text_view_average_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:fontFamily="@font/lato"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/medium_black"
+            android:textSize="@dimen/text_medium"
+            app:layout_constraintStart_toEndOf="@id/image_category"
+            app:layout_constraintTop_toBottomOf="@id/text_view_average_name"
+            tools:text="food" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

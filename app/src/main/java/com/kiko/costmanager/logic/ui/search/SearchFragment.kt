@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.commit
 import com.airbnb.lottie.LottieDrawable
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.FragmentSearchBinding
@@ -13,6 +13,7 @@ import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.data.models.CityEntity
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
 import com.kiko.costmanager.logic.ui.Base.HomeActivity
+import com.kiko.costmanager.logic.ui.details.DetailsFragment
 import com.kiko.costmanager.logic.ui.search.adapter.SearchAdapter
 import com.kiko.costmanager.logic.ui.search.adapter.SearchInteractListener
 
@@ -58,7 +59,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchInteractList
     }
 
     override fun onClickItem(cityEntity: CityEntity) {
-        Toast.makeText(requireContext(), cityEntity.cityName, Toast.LENGTH_SHORT).show()
+        parentFragmentManager.commit {
+            replace(R.id.fragment_container, DetailsFragment.newInstance(cityEntity.id))
+            addToBackStack(null)
+            setReorderingAllowed(true)
+        }
+        (activity as HomeActivity).bottomNavView(false)
     }
 
     private fun showAnimation() {

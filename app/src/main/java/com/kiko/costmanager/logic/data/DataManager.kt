@@ -16,8 +16,8 @@ object DataManager {
 
     fun getAllCitiesData() = cities
 
-    fun getAllCategory(): List<Category> {
-        return listOf(
+    fun getAllCategory() =
+        listOf(
             Category(0, "Meals", Constants.ImageUrl.MEALS),
             Category(1, "Drinks", Constants.ImageUrl.DRINKS),
             Category(2, "Fruits", Constants.ImageUrl.FRUITS),
@@ -30,7 +30,11 @@ object DataManager {
             Category(9, "Salaries", Constants.ImageUrl.SALARIES),
             Category(10, "Internet", Constants.ImageUrl.INTERNET),
         )
-    }
+
+//    fun getAllPrices(cityEntity: CityEntity): Prices {
+//    return listOf(
+//        Prices("Average Meals",cityEntity.mealsPrices)
+//    }
 
     fun searchInCategory(categoryName: String) =
         getAllCategory().filter {
@@ -42,4 +46,6 @@ object DataManager {
             it.cityName.lowercase().contains(name.lowercase()) ||
                     it.country.lowercase().contains(name.lowercase())
         }
+
+    fun getCityById(id: Int) = getAllCitiesData().filter { it.id == id }
 }
