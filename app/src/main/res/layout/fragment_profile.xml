@@ -8,7 +8,7 @@
     tools:context=".logic.ui.profile.ProfileFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/image_bg"
+        android:id="@+id/image_background"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:scaleType="centerCrop"
@@ -23,14 +23,14 @@
         android:layout_height="0dp"
         android:contentDescription="@string/login"
         android:src="@drawable/profile_image"
-        app:layout_constraintBottom_toBottomOf="@id/image_bg"
-        app:layout_constraintEnd_toEndOf="@id/image_bg"
+        app:layout_constraintBottom_toBottomOf="@id/image_background"
+        app:layout_constraintEnd_toEndOf="@id/image_background"
         app:layout_constraintHeight_percent="0.2"
-        app:layout_constraintStart_toStartOf="@id/image_bg"
-        app:layout_constraintTop_toBottomOf="@id/image_bg" />
+        app:layout_constraintStart_toStartOf="@id/image_background"
+        app:layout_constraintTop_toBottomOf="@id/image_background" />
 
     <TextView
-        android:id="@+id/text_view_email"
+        android:id="@+id/email_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
@@ -44,7 +44,7 @@
         tools:text="food" />
 
     <TextView
-        android:id="@+id/text_view_name"
+        android:id="@+id/name_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
@@ -54,11 +54,11 @@
         android:textSize="@dimen/text_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_email"
+        app:layout_constraintTop_toBottomOf="@id/email_textview"
         tools:text="food" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_logout"
+        android:id="@+id/logout_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/long_height"
         android:layout_marginHorizontal="@dimen/margin_x_large"
@@ -73,10 +73,10 @@
         app:iconGravity="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_name" />
+        app:layout_constraintTop_toBottomOf="@id/name_textview" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_delete"
+        android:id="@+id/delete_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/long_height"
         android:layout_marginHorizontal="@dimen/margin_x_large"
@@ -91,10 +91,10 @@
         app:iconGravity="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_logout" />
+        app:layout_constraintTop_toBottomOf="@id/logout_button" />
 
     <TextView
-        android:id="@+id/text_view_contactus"
+        android:id="@+id/contactus_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"

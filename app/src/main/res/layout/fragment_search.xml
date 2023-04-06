@@ -10,7 +10,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/search_image"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="@dimen/image_height_256"
         android:scaleType="centerCrop"
         android:src="@drawable/search_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie"
-        android:layout_width="256dp"
+        android:layout_width="@dimen/image_height_256"
         android:layout_height="0dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

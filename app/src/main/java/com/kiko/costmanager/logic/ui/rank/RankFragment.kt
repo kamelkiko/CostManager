@@ -34,15 +34,9 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
 
     private fun addCallBack() {
         binding.recycleRank.adapter = adapter
-        binding.editTextSearch.doAfterTextChanged {
-            val searchedCategories = DataManager.searchInCategory(it.toString())
-            if (searchedCategories.isNotEmpty()) {
-                hideAnimation()
-                adapter.setData(searchedCategories)
-                binding.recycleRank.scrollToPosition(0)
-            } else
-                showAnimation()
-        }
+
+        adapter.setData(DataManager.getAllCategory())
+        binding.recycleRank.scrollToPosition(0)
 
     }
 
@@ -55,20 +49,4 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
         Toast.makeText(requireContext(), category.categoryName, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showAnimation() {
-        binding.apply {
-            lottie.visibility = View.VISIBLE
-            lottie.setAnimation(R.raw.not_found)
-            lottie.repeatCount = LottieDrawable.INFINITE
-            lottie.playAnimation()
-            binding.recycleRank.visibility = View.GONE
-        }
-    }
-
-    private fun hideAnimation() {
-        binding.apply {
-            recycleRank.visibility = View.VISIBLE
-            lottie.visibility = View.GONE
-        }
-    }
 }

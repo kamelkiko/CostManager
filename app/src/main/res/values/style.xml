@@ -46,6 +46,7 @@
     <style name="rankImage">
         <item name="cornerSizeBottomLeft">16%</item>
         <item name="cornerSizeBottomRight">16%</item>
+
     </style>
 
     <style name="favouriteImage">

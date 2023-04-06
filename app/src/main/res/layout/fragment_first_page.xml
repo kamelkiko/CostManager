@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:fontFamily="@font/lato_bold"
-        android:maxWidth="250dp"
+        android:maxWidth="@dimen/text_250"
         android:maxLines="2"
         android:text="@string/popular_places_in_the_world"
         android:textColor="@color/dark_black"
@@ -45,12 +45,13 @@
         app:layout_constraintVertical_bias="0.65"/>
 
     <TextView
+        android:id="@+id/description_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_large"
         android:fontFamily="@font/lato"
-        android:maxWidth="300dp"
+        android:maxWidth="@dimen/text_300"
         android:maxLines="5"
         android:text="@string/the_world_is_a_vast_and_beautiful_place_filled_with_fascinating_sights_and_experiences_from_natural_wonders_to_historic_landmarks_there_are_countless_popular_places_around_the_globe_that_attract_millions_of_visitors_every_year"
         android:textColor="@color/medium_black"

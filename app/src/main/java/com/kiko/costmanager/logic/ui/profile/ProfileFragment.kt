@@ -31,18 +31,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun setup() {
         (activity as HomeActivity).bottomNavView(true)
         binding.apply {
-            textViewEmail.text = PrefsUtil.userName
-            textViewName.text = PrefsUtil.userEmail
+            emailTextview.text = PrefsUtil.userName
+            emailTextview.text = PrefsUtil.userEmail
         }
     }
 
     private fun addCallBacks() {
-        binding.textViewContactus.setOnClickListener {
+        binding.contactusTextview.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(MY_FACE_ACCOUNT)
             startActivity(intent)
         }
-        binding.btnLogout.setOnClickListener {
+        binding.logoutButton.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage("Do you want to logout?")
                 .setTitle("Logout")
@@ -61,7 +61,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             dialog.show()
 
         }
-        binding.btnDelete.setOnClickListener {
+        binding.deleteButton.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage("Do you want to delete your account?")
                 .setTitle("Delete Account")
