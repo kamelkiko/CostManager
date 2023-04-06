@@ -76,7 +76,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
 
     private fun finishOnBoarding() {
         PrefsUtil.initPrefsUtil(requireActivity())
-        PrefsUtil.onBoardingFinish = true
+        PrefsUtil.isOnBoardingFinished = true
     }
 
 }

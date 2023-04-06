@@ -52,9 +52,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     )
                         .show()
             }
-            binding.textViewForgotPassword.setOnClickListener {
-
-            }
+        }
+        binding.textViewForgotPassword.setOnClickListener {
+            if (PrefsUtil.userPassword != "")
+                Toast.makeText(
+                    requireContext(),
+                    PrefsUtil.userPassword,
+                    Toast.LENGTH_SHORT
+                ).show()
+            else
+                Toast.makeText(
+                    requireContext(),
+                    "You should have account first",
+                    Toast.LENGTH_SHORT
+                ).show()
         }
     }
 }

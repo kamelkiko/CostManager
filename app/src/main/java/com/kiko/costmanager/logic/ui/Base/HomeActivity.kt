@@ -31,10 +31,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         PrefsUtil.initPrefsUtil(this)
-//        setup()
-        showHome()
+        setup()
         addCallBack()
-        binding.navBottom.selectedItemId = R.id.nav_home
     }
 
     private fun setup() {
@@ -53,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getSharedPrefOnBoarding() {
-        val isOnBoardingFinished = PrefsUtil.onBoardingFinish
+        val isOnBoardingFinished = PrefsUtil.isOnBoardingFinished
         if (isOnBoardingFinished!!) getSharedPrefUser()
         else showOnBoarding()
     }
@@ -62,9 +60,9 @@ class HomeActivity : AppCompatActivity() {
         val email = PrefsUtil.userEmail
         val userName = PrefsUtil.userName
         val password = PrefsUtil.userPassword
-        if (email != "" && userName != "" && password != "")
+        if (email != "" && userName != "" && password != "") {
             showHome()
-        else
+        } else
             showLogIn()
     }
 

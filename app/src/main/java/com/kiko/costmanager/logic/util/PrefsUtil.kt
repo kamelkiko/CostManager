@@ -40,7 +40,13 @@ object PrefsUtil {
             sharedPreferences?.edit()?.putString(KEY_EMAIL, value)?.apply()
         }
 
-    var onBoardingFinish: Boolean?
+    var isOnBoardingFinished: Boolean?
+        get() = sharedPreferences?.getBoolean(KEY_FINISH, false)
+        set(value) {
+            sharedPreferences?.edit()?.putBoolean(KEY_FINISH, value!!)?.apply()
+        }
+
+    var isUserLoggedOut: Boolean?
         get() = sharedPreferences?.getBoolean(KEY_FINISH, false)
         set(value) {
             sharedPreferences?.edit()?.putBoolean(KEY_FINISH, value!!)?.apply()

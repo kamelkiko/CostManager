@@ -1,5 +1,6 @@
 package com.kiko.costmanager.logic.ui.profile
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -42,18 +43,41 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             startActivity(intent)
         }
         binding.btnLogout.setOnClickListener {
-            parentFragmentManager.popBackStack(null, POP_BACK_STACK_INCLUSIVE)
-            parentFragmentManager.commit {
-                replace(R.id.fragment_container, LoginFragment())
-                setReorderingAllowed(true)
-            }
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("Do you want to logout?")
+                .setTitle("Logout")
+                .setPositiveButton("Yes") { _, _ ->
+                    PrefsUtil.isUserLoggedOut = true
+                    parentFragmentManager.popBackStack(null, POP_BACK_STACK_INCLUSIVE)
+                    parentFragmentManager.commit {
+                        replace(R.id.fragment_container, LoginFragment())
+                        setReorderingAllowed(true)
+                    }
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.cancel()
+                }
+            val dialog = builder.create()
+            dialog.show()
+
         }
         binding.btnDelete.setOnClickListener {
-            PrefsUtil.clearAccount()
-            parentFragmentManager.commit {
-                replace(R.id.fragment_container, LoginFragment())
-                setReorderingAllowed(true)
-            }
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("Do you want to delete your account?")
+                .setTitle("Delete Account")
+                .setPositiveButton("Yes") { _, _ ->
+                    PrefsUtil.clearAccount()
+                    parentFragmentManager.commit {
+                        replace(R.id.fragment_container, LoginFragment())
+                        setReorderingAllowed(true)
+                    }
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.cancel()
+                }
+            val dialog = builder.create()
+            dialog.show()
+
         }
     }
 
