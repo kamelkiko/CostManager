@@ -26,7 +26,7 @@
         android:layout_marginHorizontal="@dimen/margin_large"
         android:autofillHints="name"
         android:background="@drawable/search_view"
-        android:drawablePadding="@dimen/padding_large"
+        android:gravity="center"
         android:fontFamily="@font/lato"
         android:text="@string/watch_top_10_cities"
         android:padding="@dimen/padding_large"

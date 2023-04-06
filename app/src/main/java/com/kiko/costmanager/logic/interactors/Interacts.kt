@@ -44,8 +44,8 @@ class Interacts(private val dataManager: DataManager) {
         dataManager.getAllCitiesData()
             .filter(::exclude0fSalariesAnd0fInternetPrices)
             .sortedBy(::calculateThePercentageBetweenSalaryAndInternetPrice)
-            .first { it.cityName.lowercase() == city.lowercase() }
-            .servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl ?: 0f
+            .firstOrNull { it.cityName.lowercase() == city.lowercase() }
+            ?.servicesPrices?.internet60MbpsOrMoreUnlimitedDataCableAdsl ?: 0f
 
 
     fun getCitiesMealName() =
@@ -62,7 +62,7 @@ class Interacts(private val dataManager: DataManager) {
                 ((it.mealsPrices.mealInexpensiveRestaurant
                     ?: 0f) + it.mealsPrices.mealFor2PeopleMidRangeRestaurant!! +
                         it.mealsPrices.mealAtMcDonaldSOrEquivalent!!)
-            }.first()
+            }.firstOrNull() ?: 0f
 
     fun getCitiesDrinkNumber(city: String) =
         dataManager.getAllCitiesData()
@@ -89,7 +89,7 @@ class Interacts(private val dataManager: DataManager) {
 
 
                         )?.div(5f)
-            }.first() ?: 0f
+            }.firstOrNull() ?: 0f
 
 
     fun getCitiesDrinkName() =
@@ -117,7 +117,7 @@ class Interacts(private val dataManager: DataManager) {
                         }
                     }
                 })?.div(7f)
-            }.first() ?: 0f
+            }.firstOrNull() ?: 0f
 
 
     fun getCitiesFruitName() =
@@ -146,7 +146,7 @@ class Interacts(private val dataManager: DataManager) {
                         }
                     }
                 })?.div(6f)
-            }.first() ?: 0f
+            }.firstOrNull() ?: 0f
 
 
     fun getCitiesFoodName() =
@@ -172,8 +172,8 @@ class Interacts(private val dataManager: DataManager) {
                 city.foodPrices.beefRound1kgOrEquivalentBackLegRedMeat!!)) / 6f
 
 
-    fun getCitiesServicesNumber(city: String) =
-        dataManager.getAllCitiesData()
+    fun getCitiesServicesNumber(city: String): Float {
+        val list = dataManager.getAllCitiesData()
             .filter(::exclude0fServices)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
@@ -207,7 +207,12 @@ class Interacts(private val dataManager: DataManager) {
                     }
                 }
                         )?.div(8)
-            }.first() ?: 0f
+            }
+        return if (list.isEmpty())
+            0f
+        else
+            list.firstOrNull() ?: 0f
+    }
 
 
     fun getCitiesServicesName() =
@@ -255,7 +260,7 @@ class Interacts(private val dataManager: DataManager) {
                     }
                 }
                         )?.div(4)
-            }.first() ?: 0f
+            }.firstOrNull() ?: 0f
 
 
     fun getCitiesClothesName() =
@@ -312,7 +317,7 @@ class Interacts(private val dataManager: DataManager) {
                     }
                 }
                         )?.div(6f)
-            }.first() ?: 0f
+            }.firstOrNull() ?: 0f
 
     fun getCitiesTransName() =
         dataManager.getAllCitiesData().asSequence().filter(::exclude0fTrans)
@@ -346,7 +351,7 @@ class Interacts(private val dataManager: DataManager) {
                         it1
                     )
                 })?.div(2f)
-            }.first() ?: 0f
+            }.firstOrNull() ?: 0f
 
     fun getCitiesCarName() =
         dataManager.getAllCitiesData().asSequence().filter(::exclude0fCars)
@@ -389,7 +394,7 @@ class Interacts(private val dataManager: DataManager) {
                     }
                 }
                         )?.div(6f)
-            }.first() ?: 0f
+            }.firstOrNull() ?: 0f
 
     fun getCitiesRealStateName() =
         dataManager.getAllCitiesData().asSequence().filter(::exclude0fStates)
