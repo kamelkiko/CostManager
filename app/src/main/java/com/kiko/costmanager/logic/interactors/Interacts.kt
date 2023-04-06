@@ -6,14 +6,14 @@ import com.kiko.costmanager.logic.data.models.CityEntity
 class Interacts(private val dataManager: DataManager) {
     fun getAverageSalaryCityEntry() =
         dataManager.getAllCitiesData()
-            .filter(::excludeNullSalariesAndLowQualityData)
+            .filter(::exclude0fSalariesAndLowQualityData)
             .sortedByDescending { it.averageMonthlyNetSalaryAfterTax }
             .take(10)
 
     fun getAverageSalaryCityName() =
         dataManager.getAllCitiesData()
             .asSequence()
-            .filter(::excludeNullSalariesAndLowQualityData)
+            .filter(::exclude0fSalariesAndLowQualityData)
             .sortedByDescending { it.averageMonthlyNetSalaryAfterTax }
             .take(10)
             .map { it.cityName }.toList()
@@ -28,28 +28,28 @@ class Interacts(private val dataManager: DataManager) {
 
     fun getCitiesInternetName() =
         dataManager.getAllCitiesData().asSequence()
-            .filter(::excludeNullSalariesAndNullInternetPrices)
+            .filter(::exclude0fSalariesAnd0fInternetPrices)
             .sortedBy(::calculateThePercentageBetweenSalaryAndInternetPrice)
             .take(10)
             .map { it.cityName }.toList()
 
     fun getCitiesInternetCityEntry() =
         dataManager.getAllCitiesData()
-            .filter(::excludeNullSalariesAndNullInternetPrices)
+            .filter(::exclude0fSalariesAnd0fInternetPrices)
             .sortedBy(::calculateThePercentageBetweenSalaryAndInternetPrice)
             .take(10)
 
 
     fun getCitiesInternetNumber(city: String) =
         dataManager.getAllCitiesData()
-            .filter(::excludeNullSalariesAndNullInternetPrices)
+            .filter(::exclude0fSalariesAnd0fInternetPrices)
             .sortedBy(::calculateThePercentageBetweenSalaryAndInternetPrice)
             .first { it.cityName.lowercase() == city.lowercase() }
             .servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl ?: 0f
 
 
     fun getCitiesMealName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullMeals)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fMeals)
             .sortedBy(::calculateThePercentageMeals)
             .take(10)
             .map { it.cityName }.toList()
@@ -59,18 +59,14 @@ class Interacts(private val dataManager: DataManager) {
         dataManager.getAllCitiesData()
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.mealsPrices.mealFor2PeopleMidRangeRestaurant?.let { it1 ->
-                    it.mealsPrices.mealAtMcDonaldSOrEquivalent?.let { it2 ->
-                        it.mealsPrices.mealInexpensiveRestaurant?.plus(
-                            it1
-                        )?.plus(it2)
-                    }
-                })?.div(3f)
-            }.first() ?: 0f
+                ((it.mealsPrices.mealInexpensiveRestaurant
+                    ?: 0f) + it.mealsPrices.mealFor2PeopleMidRangeRestaurant!! +
+                        it.mealsPrices.mealAtMcDonaldSOrEquivalent!!)
+            }.first()
 
     fun getCitiesDrinkNumber(city: String) =
         dataManager.getAllCitiesData()
-            .filter(::excludeNullDrinks)
+            .filter(::exclude0fDrinks)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
                 (it.drinksPrices.waterOneAndHalfLiterBottleAtTheMarket?.let { it1 ->
@@ -97,7 +93,7 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesDrinkName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullDrinks)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fDrinks)
             .sortedBy(::calculateThePercentageDrinks)
             .take(10)
             .map { it.cityName }.toList()
@@ -125,14 +121,14 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesFruitName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullFruit)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fFruit)
             .sortedBy(::calculateThePercentageFruit)
             .take(10)
             .map { it.cityName }.toList()
 
     fun getCitiesFoodNumber(city: String) =
         dataManager.getAllCitiesData()
-            .filter(::excludeNullFood)
+            .filter(::exclude0fFood)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
                 (it.foodPrices.eggsRegular12?.let { it1 ->
@@ -154,18 +150,18 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesFoodName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullFood)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fFood)
             .sortedBy(::calculateThePercentageFood)
             .take(10)
             .map { it.cityName }.toList()
 
-    private fun excludeNullFood(city: CityEntity) =
-        city.foodPrices.chickenFillets1kg != null
-                && city.foodPrices.eggsRegular12 != null
-                && city.foodPrices.localCheese1kg != null
-                && city.foodPrices.riceWhite1kg != null
-                && city.foodPrices.loafOfFreshWhiteBread500g != null
-                && city.foodPrices.beefRound1kgOrEquivalentBackLegRedMeat != null
+    private fun exclude0fFood(city: CityEntity) =
+        city.foodPrices.chickenFillets1kg != 0f
+                && city.foodPrices.eggsRegular12 != 0f
+                && city.foodPrices.localCheese1kg != 0f
+                && city.foodPrices.riceWhite1kg != 0f
+                && city.foodPrices.loafOfFreshWhiteBread500g != 0f
+                && city.foodPrices.beefRound1kgOrEquivalentBackLegRedMeat != 0f
 
     private fun calculateThePercentageFood(city: CityEntity) =
         ((city.foodPrices.chickenFillets1kg!! +
@@ -178,7 +174,7 @@ class Interacts(private val dataManager: DataManager) {
 
     fun getCitiesServicesNumber(city: String) =
         dataManager.getAllCitiesData()
-            .filter(::excludeNullServices)
+            .filter(::exclude0fServices)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
                 (it.servicesPrices.basicElectricityHeatingCoolingWaterGarbageFor85m2Apartment?.let { it1 ->
@@ -215,20 +211,20 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesServicesName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullServices)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fServices)
             .sortedBy(::calculateThePercentageServices)
             .take(10)
             .map { it.cityName }.toList()
 
-    private fun excludeNullServices(city: CityEntity) =
-        city.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl != null
-                && city.servicesPrices.basicElectricityHeatingCoolingWaterGarbageFor85m2Apartment != null
-                && city.servicesPrices.cinemaInternationalReleaseOneSeat != null
-                && city.servicesPrices.fitnessClubMonthlyFeeForOneAdult != null
-                && city.servicesPrices.internationalPrimarySchoolYearlyForOneChild != null
-                && city.servicesPrices.oneMinOfPrepaidMobileTariffLocalNoDiscountsOrPlans != null
-                && city.servicesPrices.preschoolOrKindergartenFullDayPrivateMonthlyForOneChild != null
-                && city.servicesPrices.tennisCourtRentOneHourOnWeekend != null
+    private fun exclude0fServices(city: CityEntity) =
+        city.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl != 0f
+                && city.servicesPrices.basicElectricityHeatingCoolingWaterGarbageFor85m2Apartment != 0f
+                && city.servicesPrices.cinemaInternationalReleaseOneSeat != 0f
+                && city.servicesPrices.fitnessClubMonthlyFeeForOneAdult != 0f
+                && city.servicesPrices.internationalPrimarySchoolYearlyForOneChild != 0f
+                && city.servicesPrices.oneMinOfPrepaidMobileTariffLocalNoDiscountsOrPlans != 0f
+                && city.servicesPrices.preschoolOrKindergartenFullDayPrivateMonthlyForOneChild != 0f
+                && city.servicesPrices.tennisCourtRentOneHourOnWeekend != 0f
 
     private fun calculateThePercentageServices(city: CityEntity) =
         ((city.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl!! +
@@ -242,7 +238,7 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesClothesNumber(city: String) =
-        dataManager.getAllCitiesData().filter(::excludeNullClothes)
+        dataManager.getAllCitiesData().filter(::exclude0fClothes)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
                 (it.clothesPrices.onePairOfMenLeatherBusinessShoes?.let { it1 ->
@@ -263,16 +259,16 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesClothesName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullClothes)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fClothes)
             .sortedBy(::calculateThePercentageClothes)
             .take(10)
             .map { it.cityName }.toList()
 
-    private fun excludeNullClothes(city: CityEntity) =
-        city.clothesPrices.onePairOfJeansLevis50oneOrSimilar != null
-                && city.clothesPrices.onePairOfMenLeatherBusinessShoes != null
-                && city.clothesPrices.onePairOfNikeRunningShoesMidRange != null
-                && city.clothesPrices.oneSummerDressInAChainStoreZaraHAndM != null
+    private fun exclude0fClothes(city: CityEntity) =
+        city.clothesPrices.onePairOfJeansLevis50oneOrSimilar != 0f
+                && city.clothesPrices.onePairOfMenLeatherBusinessShoes != 0f
+                && city.clothesPrices.onePairOfNikeRunningShoesMidRange != 0f
+                && city.clothesPrices.oneSummerDressInAChainStoreZaraHAndM != 0f
 
     private fun calculateThePercentageClothes(city: CityEntity) =
         ((city.clothesPrices.onePairOfJeansLevis50oneOrSimilar!! +
@@ -281,17 +277,17 @@ class Interacts(private val dataManager: DataManager) {
                 city.clothesPrices.oneSummerDressInAChainStoreZaraHAndM!!
                 )) / 4f
 
-    private fun excludeNullFruit(city: CityEntity) =
-        city.fruitAndVegetablesPrices.apples1kg != null
-                && city.fruitAndVegetablesPrices.banana1kg != null
-                && city.fruitAndVegetablesPrices.lettuceOneHead != null
-                && city.fruitAndVegetablesPrices.onion1kg != null
-                && city.fruitAndVegetablesPrices.oranges1kg != null
-                && city.fruitAndVegetablesPrices.potato1kg != null
-                && city.fruitAndVegetablesPrices.tomato1kg != null
+    private fun exclude0fFruit(city: CityEntity) =
+        city.fruitAndVegetablesPrices.apples1kg != 0f
+                && city.fruitAndVegetablesPrices.banana1kg != 0f
+                && city.fruitAndVegetablesPrices.lettuceOneHead != 0f
+                && city.fruitAndVegetablesPrices.onion1kg != 0f
+                && city.fruitAndVegetablesPrices.oranges1kg != 0f
+                && city.fruitAndVegetablesPrices.potato1kg != 0f
+                && city.fruitAndVegetablesPrices.tomato1kg != 0f
 
     fun getCitiesTransNumber(city: String) =
-        dataManager.getAllCitiesData().filter(::excludeNullTrans)
+        dataManager.getAllCitiesData().filter(::exclude0fTrans)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
                 (it.transportationsPrices.monthlyPassRegularPrice?.let { it1 ->
@@ -319,7 +315,7 @@ class Interacts(private val dataManager: DataManager) {
             }.first() ?: 0f
 
     fun getCitiesTransName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullTrans)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fTrans)
             .sortedBy(::calculateThePercentageTrans)
             .take(10)
             .map { it.cityName }.toList()
@@ -333,16 +329,16 @@ class Interacts(private val dataManager: DataManager) {
                 city.transportationsPrices.taxi1hourWaitingNormalTariff!!
                 )) / 6f
 
-    private fun excludeNullTrans(city: CityEntity) =
-        city.transportationsPrices.gasolineOneLiter != null
-                && city.transportationsPrices.monthlyPassRegularPrice != null
-                && city.transportationsPrices.oneWayTicketLocalTransport != null
-                && city.transportationsPrices.taxi1kmNormalTariff != null
-                && city.transportationsPrices.taxiStartNormalTariff != null
-                && city.transportationsPrices.taxi1hourWaitingNormalTariff != null
+    private fun exclude0fTrans(city: CityEntity) =
+        city.transportationsPrices.gasolineOneLiter != 0f
+                && city.transportationsPrices.monthlyPassRegularPrice != 0f
+                && city.transportationsPrices.oneWayTicketLocalTransport != 0f
+                && city.transportationsPrices.taxi1kmNormalTariff != 0f
+                && city.transportationsPrices.taxiStartNormalTariff != 0f
+                && city.transportationsPrices.taxi1hourWaitingNormalTariff != 0f
 
     fun getCitiesCarNumber(city: String) =
-        dataManager.getAllCitiesData().filter(::excludeNullCars)
+        dataManager.getAllCitiesData().filter(::exclude0fCars)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
                 (it.carsPrices.volkswagenGolf_1_4_90kwTrendLineOrEquivalentNewCar?.let { it1 ->
@@ -353,7 +349,7 @@ class Interacts(private val dataManager: DataManager) {
             }.first() ?: 0f
 
     fun getCitiesCarName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullCars)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fCars)
             .sortedBy(::calculateThePercentageCars)
             .take(10)
             .map { it.cityName }.toList()
@@ -363,12 +359,12 @@ class Interacts(private val dataManager: DataManager) {
                 city.carsPrices.volkswagenGolf_1_4_90kwTrendLineOrEquivalentNewCar!!
                 )) / 2f
 
-    private fun excludeNullCars(city: CityEntity) =
-        city.carsPrices.toyotaCorollaSedan_1_6l_97kwComfortOrEquivalentNewCar != null
-                && city.carsPrices.volkswagenGolf_1_4_90kwTrendLineOrEquivalentNewCar != null
+    private fun exclude0fCars(city: CityEntity) =
+        city.carsPrices.toyotaCorollaSedan_1_6l_97kwComfortOrEquivalentNewCar != 0f
+                && city.carsPrices.volkswagenGolf_1_4_90kwTrendLineOrEquivalentNewCar != 0f
 
     fun getCitiesRealStateNumber(city: String) =
-        dataManager.getAllCitiesData().filter(::excludeNullStates)
+        dataManager.getAllCitiesData().filter(::exclude0fStates)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
                 (it.realEstatesPrices.pricePerSquareMeterToBuyApartmentOutsideOfCentre?.let { it1 ->
@@ -396,7 +392,7 @@ class Interacts(private val dataManager: DataManager) {
             }.first() ?: 0f
 
     fun getCitiesRealStateName() =
-        dataManager.getAllCitiesData().asSequence().filter(::excludeNullStates)
+        dataManager.getAllCitiesData().asSequence().filter(::exclude0fStates)
             .sortedBy(::calculateThePercentageStates)
             .take(10)
             .map { it.cityName }.toList()
@@ -410,13 +406,13 @@ class Interacts(private val dataManager: DataManager) {
                 city.realEstatesPrices.pricePerSquareMeterToBuyApartmentInCityCentre!!
                 )) / 6f
 
-    private fun excludeNullStates(city: CityEntity) =
-        city.realEstatesPrices.apartment3BedroomsInCityCentre != null
-                && city.realEstatesPrices.apartment3BedroomsOutsideOfCentre != null
-                && city.realEstatesPrices.apartmentOneBedroomInCityCentre != null
-                && city.realEstatesPrices.pricePerSquareMeterToBuyApartmentInCityCentre != null
-                && city.realEstatesPrices.pricePerSquareMeterToBuyApartmentOutsideOfCentre != null
-                && city.realEstatesPrices.apartmentOneBedroomOutsideOfCentre != null
+    private fun exclude0fStates(city: CityEntity) =
+        city.realEstatesPrices.apartment3BedroomsInCityCentre != 0f
+                && city.realEstatesPrices.apartment3BedroomsOutsideOfCentre != 0f
+                && city.realEstatesPrices.apartmentOneBedroomInCityCentre != 0f
+                && city.realEstatesPrices.pricePerSquareMeterToBuyApartmentInCityCentre != 0f
+                && city.realEstatesPrices.pricePerSquareMeterToBuyApartmentOutsideOfCentre != 0f
+                && city.realEstatesPrices.apartmentOneBedroomOutsideOfCentre != 0f
 
     private fun calculateThePercentageFruit(city: CityEntity) =
         ((city.fruitAndVegetablesPrices.apples1kg!! +
@@ -427,34 +423,34 @@ class Interacts(private val dataManager: DataManager) {
                 city.fruitAndVegetablesPrices.potato1kg!! +
                 city.fruitAndVegetablesPrices.tomato1kg!!)) / 7f
 
-    private fun excludeNullSalariesAndLowQualityData(city: CityEntity): Boolean {
-        return city.averageMonthlyNetSalaryAfterTax != null && city.dataQuality
+    private fun exclude0fSalariesAndLowQualityData(city: CityEntity): Boolean {
+        return city.averageMonthlyNetSalaryAfterTax != 0f && city.dataQuality
     }
 
     private fun calculateThePercentageBetweenSalaryAndInternetPrice(city: CityEntity) =
         city.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl!! /
                 city.averageMonthlyNetSalaryAfterTax!!
 
-    private fun excludeNullSalariesAndNullInternetPrices(city: CityEntity) =
-        city.averageMonthlyNetSalaryAfterTax != null
-                && city.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl != null
+    private fun exclude0fSalariesAnd0fInternetPrices(city: CityEntity) =
+        city.averageMonthlyNetSalaryAfterTax != 0f
+                && city.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl != 0f
 
-    private fun excludeNullMeals(city: CityEntity) =
-        city.mealsPrices.mealAtMcDonaldSOrEquivalent != null
-                && city.mealsPrices.mealFor2PeopleMidRangeRestaurant != null
-                && city.mealsPrices.mealInexpensiveRestaurant != null
+    private fun exclude0fMeals(city: CityEntity) =
+        city.mealsPrices.mealAtMcDonaldSOrEquivalent != 0f
+                && city.mealsPrices.mealFor2PeopleMidRangeRestaurant != 0f
+                && city.mealsPrices.mealInexpensiveRestaurant != 0f
 
     private fun calculateThePercentageMeals(city: CityEntity) =
         (city.mealsPrices.mealAtMcDonaldSOrEquivalent!! +
                 city.mealsPrices.mealInexpensiveRestaurant!! +
                 city.mealsPrices.mealFor2PeopleMidRangeRestaurant!!) / 3f
 
-    private fun excludeNullDrinks(city: CityEntity) =
-        city.drinksPrices.cappuccinoRegularInRestaurants != null
-                && city.drinksPrices.milkRegularOneLiter != null
-                && city.drinksPrices.cokePepsiAThirdOfLiterBottleInRestaurants != null
-                && city.drinksPrices.waterAThirdOfLiterBottleInRestaurants != null
-                && city.drinksPrices.waterOneAndHalfLiterBottleAtTheMarket != null
+    private fun exclude0fDrinks(city: CityEntity) =
+        city.drinksPrices.cappuccinoRegularInRestaurants != 0f
+                && city.drinksPrices.milkRegularOneLiter != 0f
+                && city.drinksPrices.cokePepsiAThirdOfLiterBottleInRestaurants != 0f
+                && city.drinksPrices.waterAThirdOfLiterBottleInRestaurants != 0f
+                && city.drinksPrices.waterOneAndHalfLiterBottleAtTheMarket != 0f
 
     private fun calculateThePercentageDrinks(city: CityEntity) =
         (city.drinksPrices.cappuccinoRegularInRestaurants!! +

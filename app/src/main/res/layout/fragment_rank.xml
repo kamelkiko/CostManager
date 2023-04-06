@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    app:layoutDescription="@xml/fragment_rank_scene"
     tools:context=".logic.ui.rank.RankFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/rank_image"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/rankImage" />
+
+    <TextView
+        android:id="@+id/edit_text_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_large"
+        android:autofillHints="name"
+        android:background="@drawable/search_view"
+        android:drawablePadding="@dimen/padding_large"
+        android:fontFamily="@font/lato"
+        android:text="@string/watch_top_10_cities"
+        android:padding="@dimen/padding_large"
+        android:paddingStart="@dimen/padding_large"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="@dimen/text_large"
+        app:layout_constraintBottom_toBottomOf="@id/rank_image"
+        app:layout_constraintEnd_toEndOf="@id/rank_image"
+        app:layout_constraintStart_toStartOf="@id/rank_image"
+        app:layout_constraintTop_toBottomOf="@id/rank_image" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_rank"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_x_large"
         android:orientation="vertical"
         android:paddingStart="@dimen/padding_medium"
         android:visibility="visible"
@@ -19,9 +51,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_search"
         app:spanCount="2"
         tools:listitem="@layout/item_rank" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
