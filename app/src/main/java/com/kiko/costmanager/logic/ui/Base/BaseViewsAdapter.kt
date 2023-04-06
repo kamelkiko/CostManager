@@ -11,7 +11,7 @@ abstract class BaseViewsAdapter<T, VB : ViewBinding>(private var list: List<T>) 
     abstract val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> VB
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val binding = bindingInflater(LayoutInflater.from(parent.context), parent, false)
-        return BaseViewHolder(binding)
+        return BaseViewHolder( binding)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
