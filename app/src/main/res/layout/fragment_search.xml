@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_large"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/margin_xx_large"
         android:autofillHints="name"
         android:background="@drawable/search_view"
         android:drawableStart="@drawable/ic_baseline_search_24"
