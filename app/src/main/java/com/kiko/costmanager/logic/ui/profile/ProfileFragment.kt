@@ -53,6 +53,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                         replace(R.id.fragment_container, LoginFragment())
                         setReorderingAllowed(true)
                     }
+                    (activity as HomeActivity).bottomNavView(false)
+
+
                 }
                 .setNegativeButton("No") { dialog, _ ->
                     dialog.cancel()
@@ -71,6 +74,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                         replace(R.id.fragment_container, LoginFragment())
                         setReorderingAllowed(true)
                     }
+                    (activity as HomeActivity).bottomNavView(false)
                 }
                 .setNegativeButton("No") { dialog, _ ->
                     dialog.cancel()

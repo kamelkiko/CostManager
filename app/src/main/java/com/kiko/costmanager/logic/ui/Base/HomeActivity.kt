@@ -89,8 +89,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showHome() {
         bottomNavView(true)
-        binding.navBottom.selectedItemId = R.id.nav_home
         setFragment(HomeFragment(), TAG_HOME_FRAGMENT)
+        setSelectedHome()
     }
 
     private fun addCallBack() {
@@ -179,5 +179,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun clearBackStack() {
         supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
+
+    private fun setSelectedHome() {
+        binding.navBottom.selectedItemId = R.id.nav_home
     }
 }
