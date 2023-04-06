@@ -61,7 +61,6 @@
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:paddingStart="@dimen/padding_medium"
-        android:requiresFadingEdge="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
