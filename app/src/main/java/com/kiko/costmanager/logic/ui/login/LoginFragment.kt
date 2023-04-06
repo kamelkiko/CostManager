@@ -36,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         binding.btnLogin.setOnClickListener {
             val userName = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
-            if (userName.isNullOrEmpty() && password.isNullOrEmpty())
+            if (userName.isEmpty() && password.isEmpty())
                 Toast.makeText(requireContext(), "You have to fill all inputs", Toast.LENGTH_SHORT)
                     .show()
             else {
@@ -44,6 +44,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     parentFragmentManager.commit {
                         replace(R.id.fragment_container, HomeFragment())
                         setReorderingAllowed(true)
+                        (activity as HomeActivity).bottomNavView(true)
                     }
                 } else
                     Toast.makeText(
@@ -52,7 +53,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         Toast.LENGTH_SHORT
                     )
                         .show()
-                (activity as HomeActivity).bottomNavView(true)
             }
         }
         binding.textViewForgotPassword.setOnClickListener {

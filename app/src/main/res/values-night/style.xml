@@ -41,4 +41,64 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/stroke_app_bar</item>
     </style>
+
+    <!-- Text Style -->
+    <style name="SectionHeader">
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:textColor">@color/dark_black</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:layout_marginStart">@dimen/margin_large</item>
+    </style>
+
+    <!--    Card Parent-->
+    <style name="CardRecItem" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+
+    <!--    Card City-->
+    <style name="CardRecItem.City">
+        <item name="android:layout_height">@dimen/card_item_food_height</item>
+        <item name="android:layout_width">@dimen/card_item_kitchen_width</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+    </style>
+
+    <!--    Item Text Parent-->
+    <style name="ItemText" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!--    Item Text Name Parent-->
+    <style name="ItemText.Name">
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textColor">@color/dark_white</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="android:layout_marginEnd">@dimen/margin_medium</item>
+    </style>
+
+    <!--    Item Text Name City-->
+    <style name="ItemText.Name.Food">
+        <item name="android:layout_marginBottom">@dimen/margin_tiny</item>
+        <item name="android:textColor">@color/dark_white</item>
+    </style>
+
+    <!--    Item Text Country Parent-->
+    <style name="ItemText.Country">
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textColor">@color/dark_white</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:layout_marginStart">@dimen/margin_tiny</item>
+    </style>
+
+    <!--    Item Text Country-->
+    <style name="ItemText.Country.Name">
+        <item name="android:textColor">@color/medium_white</item>
+        <item name="android:lineSpacingExtra">@dimen/no_width</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_marginStart">@dimen/margin_small</item>
+    </style>
 </resources>

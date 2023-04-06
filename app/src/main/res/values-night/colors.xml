@@ -19,4 +19,5 @@
     <color name="search_color">#1E1E1E</color>
     <color name="rank_card_background">#121212</color>
     <color name="medium_white">#99121212</color>
+    <color name="liner_color">#121212</color>
 </resources>
