@@ -37,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setup() {
         getSharedPrefOnBoarding()
+        openAndParseFile()
     }
 
     private fun openAndParseFile() {
@@ -60,9 +61,12 @@ class HomeActivity : AppCompatActivity() {
         val email = PrefsUtil.userEmail
         val userName = PrefsUtil.userName
         val password = PrefsUtil.userPassword
-        if (email != "" && userName != "" && password != "") {
-            showHome()
-        } else
+        if (email != "" && userName != "" && password != "")
+            if (PrefsUtil.isUserLoggedOut == true)
+                showLogIn()
+            else
+                showHome()
+        else
             showLogIn()
     }
 
@@ -81,7 +85,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showHome() {
-        openAndParseFile()
         bottomNavView(true)
         supportFragmentManager.commitNow {
             replace(R.id.fragment_container, HomeFragment())

@@ -11,6 +11,7 @@ object PrefsUtil {
     private const val KEY_PASSWORD = "keyPassword"
     private const val KEY_EMAIL = "keyEmail"
     private const val KEY_FINISH = "keyFinish"
+    private const val LOGOUT = "keyLogout"
     fun initPrefsUtil(context: Context) {
         sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
     }
@@ -47,8 +48,8 @@ object PrefsUtil {
         }
 
     var isUserLoggedOut: Boolean?
-        get() = sharedPreferences?.getBoolean(KEY_FINISH, false)
+        get() = sharedPreferences?.getBoolean(LOGOUT, false)
         set(value) {
-            sharedPreferences?.edit()?.putBoolean(KEY_FINISH, value!!)?.apply()
+            sharedPreferences?.edit()?.putBoolean(LOGOUT, value!!)?.apply()
         }
 }

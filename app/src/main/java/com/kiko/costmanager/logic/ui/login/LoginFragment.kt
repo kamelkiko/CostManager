@@ -9,6 +9,7 @@ import androidx.fragment.app.commit
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.FragmentLoginBinding
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
+import com.kiko.costmanager.logic.ui.Base.HomeActivity
 import com.kiko.costmanager.logic.ui.home.HomeFragment
 import com.kiko.costmanager.logic.ui.signup.SignUpFragment
 import com.kiko.costmanager.logic.util.PrefsUtil
@@ -35,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         binding.btnLogin.setOnClickListener {
             val userName = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
-            if (userName.isEmpty() && password.isEmpty())
+            if (userName.isNullOrEmpty() && password.isNullOrEmpty())
                 Toast.makeText(requireContext(), "You have to fill all inputs", Toast.LENGTH_SHORT)
                     .show()
             else {
@@ -51,6 +52,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         Toast.LENGTH_SHORT
                     )
                         .show()
+                (activity as HomeActivity).bottomNavView(true)
             }
         }
         binding.textViewForgotPassword.setOnClickListener {
