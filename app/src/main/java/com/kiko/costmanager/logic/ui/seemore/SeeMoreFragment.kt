@@ -14,6 +14,7 @@ import com.kiko.costmanager.logic.ui.Base.BaseFragment
 import com.kiko.costmanager.logic.ui.details.DetailsFragment
 import com.kiko.costmanager.logic.ui.seemore.adapter.SeeMoreAdapter
 import com.kiko.costmanager.logic.ui.seemore.adapter.SeeMoreInteractListener
+import com.kiko.costmanager.logic.util.Constants
 
 
 class SeeMoreFragment : BaseFragment<FragmentSeeMoreBinding>(), SeeMoreInteractListener {
@@ -28,7 +29,28 @@ class SeeMoreFragment : BaseFragment<FragmentSeeMoreBinding>(), SeeMoreInteractL
     }
 
     private fun setup() {
-        adapter = SeeMoreAdapter(DataManager.getAllCitiesData(), this)
+        val name = arguments?.getString(Constants.KEY)
+        when (name) {
+            Constants.SALARIES -> {
+                binding.toolbarSeeMore.title = Constants.SALARIES
+                adapter =
+                    SeeMoreAdapter(DataManager.getAllInteracts().getAverageSalaryCityEntry(), this)
+            }
+            Constants.INTERNET -> {
+                binding.toolbarSeeMore.title = Constants.INTERNET
+                adapter =
+                    SeeMoreAdapter(DataManager.getAllInteracts().getCitiesInternetCityEntry(), this)
+            }
+            Constants.DATA -> {
+                binding.toolbarSeeMore.title = Constants.DATA
+                adapter =
+                    SeeMoreAdapter(DataManager.getAllInteracts().getCitiesHasDataQuality(), this)
+            }
+            Constants.JUST_FOR_YOU -> {
+                binding.toolbarSeeMore.title = Constants.JUST_FOR_YOU
+                adapter = SeeMoreAdapter(DataManager.getJustForYou(), this)
+            }
+        }
         binding.recycleSeeMore.adapter = adapter
     }
 
@@ -38,10 +60,6 @@ class SeeMoreFragment : BaseFragment<FragmentSeeMoreBinding>(), SeeMoreInteractL
         }
     }
 
-    private fun getLayoutView() {
-
-    }
-
     override fun onClickItem(cityEntity: CityEntity) {
         parentFragmentManager.commit {
             replace(R.id.fragment_container, DetailsFragment.newInstance(cityEntity.id))
@@ -49,4 +67,14 @@ class SeeMoreFragment : BaseFragment<FragmentSeeMoreBinding>(), SeeMoreInteractL
             setReorderingAllowed(true)
         }
     }
+
+    companion object {
+        fun newInstance(key: String): SeeMoreFragment =
+            SeeMoreFragment().apply {
+                arguments = Bundle().apply {
+                    putString(Constants.KEY, key)
+                }
+            }
+    }
+
 }

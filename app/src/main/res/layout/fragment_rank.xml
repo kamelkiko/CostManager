@@ -19,28 +19,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/rankImage" />
 
-    <EditText
-        android:id="@+id/edit_text_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_large"
-        android:autofillHints="name"
-        android:background="@drawable/search_view"
-        android:drawableStart="@drawable/ic_baseline_search_24"
-        android:drawablePadding="@dimen/padding_large"
-        android:fontFamily="@font/lato"
-        android:hint="@string/search_here"
-        android:inputType="text"
-        android:padding="@dimen/padding_large"
-        android:paddingStart="@dimen/padding_large"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="@dimen/text_large"
-        app:layout_constraintBottom_toBottomOf="@id/rank_image"
-        app:layout_constraintEnd_toEndOf="@id/rank_image"
-        app:layout_constraintStart_toStartOf="@id/rank_image"
-        app:layout_constraintTop_toBottomOf="@id/rank_image" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_rank"
         android:layout_width="match_parent"
@@ -53,18 +31,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_search"
+        app:layout_constraintTop_toBottomOf="@id/rank_image"
         app:spanCount="2"
         tools:listitem="@layout/item_rank" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="256dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_search" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

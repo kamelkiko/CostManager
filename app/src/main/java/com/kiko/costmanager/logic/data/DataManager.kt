@@ -19,6 +19,9 @@ object DataManager {
 
     fun getAllCitiesData() = cities.toList()
 
+    fun getJustForYou() = cities.toList().shuffled()
+
+
     fun getAllCategory() =
         listOf(
             Category(0, Constants.MEALS, Constants.ImageUrl.MEALS),
@@ -46,6 +49,6 @@ object DataManager {
                     it.country.lowercase().contains(name.lowercase())
         }
 
-    fun getCityById(id: Int) = getAllCitiesData().filter { it.id == id }
+    fun getCityById(id: Int) = getAllCitiesData().first { it.id == id }
 
 }

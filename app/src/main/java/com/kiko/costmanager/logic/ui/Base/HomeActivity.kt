@@ -6,17 +6,20 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
-import androidx.fragment.app.commitNow
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.ActivityHomeBinding
 import com.kiko.costmanager.logic.data.DataManager
+import com.kiko.costmanager.logic.ui.chart.ChartFragment
+import com.kiko.costmanager.logic.ui.details.DetailsFragment
 import com.kiko.costmanager.logic.ui.home.HomeFragment
 import com.kiko.costmanager.logic.ui.login.LoginFragment
 import com.kiko.costmanager.logic.ui.onboarding.OnBoardingFragment
 import com.kiko.costmanager.logic.ui.profile.ProfileFragment
 import com.kiko.costmanager.logic.ui.rank.RankFragment
 import com.kiko.costmanager.logic.ui.search.SearchFragment
+import com.kiko.costmanager.logic.ui.seemore.SeeMoreFragment
 import com.kiko.costmanager.logic.util.CsvParser
 import com.kiko.costmanager.logic.util.PrefsUtil
 import java.io.BufferedReader
@@ -86,10 +89,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showHome() {
         bottomNavView(true)
-        supportFragmentManager.commitNow {
-            replace(R.id.fragment_container, HomeFragment())
-            setReorderingAllowed(true)
-        }
+        binding.navBottom.selectedItemId = R.id.nav_home
+        setFragment(HomeFragment(), TAG_HOME_FRAGMENT)
     }
 
     private fun addCallBack() {
@@ -144,5 +145,39 @@ class HomeActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         DataManager.clearCity()
+    }
+
+    override fun onBackPressed() {
+        when (val currentFragment =
+            supportFragmentManager.findFragmentById(binding.fragmentContainer.id)) {
+            is HomeFragment -> finish()
+            is RankFragment, is SearchFragment, is ProfileFragment -> {
+                setFragment(HomeFragment(), TAG_HOME_FRAGMENT)
+                clearBackStack()
+                binding.navBottom.selectedItemId = R.id.nav_home
+            }
+            is ChartFragment, is DetailsFragment, is SeeMoreFragment -> {
+                supportFragmentManager.popBackStack()
+            }
+            else -> {
+                supportFragmentManager.popBackStackImmediate()
+                val tag = currentFragment?.tag
+                binding.navBottom.selectedItemId = getSelectedItemId(tag)
+            }
+        }
+    }
+
+    private fun getSelectedItemId(tag: String?): Int {
+        return when (tag) {
+            TAG_HOME_FRAGMENT -> R.id.nav_home
+            TAG_RANK_FRAGMENT -> R.id.nav_ranks
+            TAG_SEARCH_FRAGMENT -> R.id.nav_search
+            TAG_PROFILE_FRAGMENT -> R.id.nav_profile
+            else -> R.id.nav_home
+        }
+    }
+
+    private fun clearBackStack() {
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }

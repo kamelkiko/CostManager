@@ -54,14 +54,4 @@
         app:layout_constraintTop_toBottomOf="@id/edit_text_search"
         tools:listitem="@layout/item_search" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="256dp"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_search" />
-
 </androidx.constraintlayout.motion.widget.MotionLayout>

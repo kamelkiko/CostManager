@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.commit
-import com.airbnb.lottie.LottieDrawable
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.FragmentSearchBinding
 import com.kiko.costmanager.logic.data.DataManager
@@ -33,29 +32,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchInteractList
         binding.editTextSearch.doAfterTextChanged {
             val search = DataManager.search(it.toString())
             if (search.isNotEmpty()) {
-                hideAnimation()
                 adapter.setData(search)
                 binding.recycleSearch.scrollToPosition(0)
-            } else
-                showAnimationError()
+            } else adapter.setData(emptyList())
         }
 
-    }
-
-    private fun showAnimationError() {
-        binding.apply {
-            lottie.visibility = View.VISIBLE
-            lottie.setAnimation(R.raw.not_found)
-            lottie.repeatCount = LottieDrawable.INFINITE
-            lottie.playAnimation()
-            binding.recycleSearch.visibility = View.GONE
-        }
     }
 
     private fun setup() {
         (activity as HomeActivity).bottomNavView(true)
         adapter = SearchAdapter(emptyList(), this)
-        showAnimation()
     }
 
     override fun onClickItem(cityEntity: CityEntity) {
@@ -67,20 +53,4 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchInteractList
         (activity as HomeActivity).bottomNavView(false)
     }
 
-    private fun showAnimation() {
-        binding.apply {
-            lottie.visibility = View.VISIBLE
-            lottie.setAnimation(R.raw.search)
-            lottie.repeatCount = LottieDrawable.INFINITE
-            lottie.playAnimation()
-            binding.recycleSearch.visibility = View.GONE
-        }
-    }
-
-    private fun hideAnimation() {
-        binding.apply {
-            recycleSearch.visibility = View.VISIBLE
-            lottie.visibility = View.GONE
-        }
-    }
 }

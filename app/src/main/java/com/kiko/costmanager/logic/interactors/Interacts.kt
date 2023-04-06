@@ -4,6 +4,12 @@ import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.data.models.CityEntity
 
 class Interacts(private val dataManager: DataManager) {
+    fun getAverageSalaryCityEntry() =
+        dataManager.getAllCitiesData()
+            .filter(::excludeNullSalariesAndLowQualityData)
+            .sortedByDescending { it.averageMonthlyNetSalaryAfterTax }
+            .take(10)
+
     fun getAverageSalaryCityName() =
         dataManager.getAllCitiesData()
             .asSequence()
@@ -17,10 +23,8 @@ class Interacts(private val dataManager: DataManager) {
             .first { it.cityName.lowercase() == city.lowercase() }
             .averageMonthlyNetSalaryAfterTax
 
-    fun getCitiesHasDataQuality(city: String) =
+    fun getCitiesHasDataQuality() =
         dataManager.getAllCitiesData().filter { it.dataQuality }
-            .map { it.cityName }
-            .first { it.lowercase() == city.lowercase() }
 
     fun getCitiesInternetName() =
         dataManager.getAllCitiesData().asSequence()
@@ -28,6 +32,12 @@ class Interacts(private val dataManager: DataManager) {
             .sortedBy(::calculateThePercentageBetweenSalaryAndInternetPrice)
             .take(10)
             .map { it.cityName }.toList()
+
+    fun getCitiesInternetCityEntry() =
+        dataManager.getAllCitiesData()
+            .filter(::excludeNullSalariesAndNullInternetPrices)
+            .sortedBy(::calculateThePercentageBetweenSalaryAndInternetPrice)
+            .take(10)
 
 
     fun getCitiesInternetNumber(city: String) =

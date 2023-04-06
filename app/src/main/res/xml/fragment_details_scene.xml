@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
+
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="1000">
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@+id/recycle_search" />
+            motion:touchAnchorId="@+id/recycle_details" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -16,21 +17,18 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/search_image"
+            android:id="@+id/image_details"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:visibilityMode="ignore" />
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
-            android:id="@+id/search_image"
+            android:id="@+id/image_details"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:visibilityMode="ignore" />
-
+            motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
 </MotionScene>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -12,9 +13,12 @@ import com.kiko.costmanager.databinding.FragmentHomeBinding
 import com.kiko.costmanager.logic.data.DataManager
 import com.kiko.costmanager.logic.data.models.CityEntity
 import com.kiko.costmanager.logic.ui.Base.BaseFragment
+import com.kiko.costmanager.logic.ui.Base.HomeActivity
 import com.kiko.costmanager.logic.ui.details.DetailsFragment
 import com.kiko.costmanager.logic.ui.home.adapter.HomeAdapter
 import com.kiko.costmanager.logic.ui.home.adapter.HomeInteractionListener
+import com.kiko.costmanager.logic.ui.seemore.SeeMoreFragment
+import com.kiko.costmanager.logic.util.Constants
 import com.kiko.costmanager.logic.util.PrefsUtil
 
 
@@ -32,6 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeInteractionListene
         super.onViewCreated(view, savedInstanceState)
         setup()
         PrefsUtil.isUserLoggedOut = false
+        (activity as HomeActivity).bottomNavView(true)
     }
 
     private fun setup() {
@@ -48,11 +53,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeInteractionListene
 
         homeItems = mutableListOf()
         homeItems.add(HomeItem.Banner(imageSliders))
-        homeItems.add(HomeItem.PopularCities(DataManager.getAllCitiesData().take(5)))
-        homeItems.add(HomeItem.AverageSalariesCities(DataManager.getAllCitiesData().take(5)))
-        homeItems.add(HomeItem.AverageInternetCities(DataManager.getAllCitiesData().take(5)))
-        homeItems.add(HomeItem.CitiesHaveDataQuality(DataManager.getAllCitiesData().take(5)))
-        homeItems.add(HomeItem.JustForYou(DataManager.getAllCitiesData().take(5)))
+        homeItems.add(HomeItem.PopularCities(DataManager.getAllCitiesData().take(8)))
+        homeItems.add(
+            HomeItem.AverageSalariesCities(
+                DataManager.getAllInteracts().getAverageSalaryCityEntry().take(8)
+            )
+        )
+        homeItems.add(
+            HomeItem.AverageInternetCities(
+                DataManager.getAllInteracts().getCitiesInternetCityEntry().take(8)
+            )
+        )
+        homeItems.add(
+            HomeItem.CitiesHaveDataQuality(
+                DataManager.getAllInteracts().getCitiesHasDataQuality().take(8)
+            )
+        )
+        homeItems.add(HomeItem.JustForYou(DataManager.getJustForYou().take(8)))
     }
 
     override fun onClickItem(cityEntity: CityEntity) {
@@ -65,13 +82,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeInteractionListene
 
     override fun onClickSeeMore(type: HomeItemType) {
         when (type) {
-            HomeItemType.AVERAGE_SALARIES_CITIES -> {}
-            HomeItemType.AVERAGE_INTERNET_CITIES -> {}
-            HomeItemType.CITY_HAS_DATA_QUALITY -> {}
+            HomeItemType.AVERAGE_SALARIES_CITIES -> {
+                setFragment(
+                    SeeMoreFragment.newInstance(
+                        Constants.SALARIES
+                    ), null
+                )
+                (activity as HomeActivity).bottomNavView(false)
+            }
+            HomeItemType.AVERAGE_INTERNET_CITIES -> {
+                setFragment(
+                    SeeMoreFragment.newInstance(
+                        Constants.INTERNET
+                    ), null
+                )
+                (activity as HomeActivity).bottomNavView(false)
+            }
+            HomeItemType.CITY_HAS_DATA_QUALITY -> {
+                setFragment(
+                    SeeMoreFragment.newInstance(
+                        Constants.DATA
+                    ), null
+                )
+                (activity as HomeActivity).bottomNavView(false)
+            }
 
-            HomeItemType.JUST_FOR_YOU -> {}
+            HomeItemType.JUST_FOR_YOU -> {
+                setFragment(
+                    SeeMoreFragment.newInstance(
+                        Constants.JUST_FOR_YOU
+                    ), null
+                )
+                (activity as HomeActivity).bottomNavView(false)
+            }
 
             else -> {}
         }
+    }
+
+    private fun setFragment(fragment: Fragment, tag: String?) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
 }

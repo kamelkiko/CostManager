@@ -93,4 +93,6 @@ object Constants {
     const val STATES = "States"
     const val SALARIES = "Salaries"
     const val INTERNET = "Internet"
+    const val DATA = "Data"
+    const val JUST_FOR_YOU = "JustForYou"
 }
