@@ -35,6 +35,7 @@ abstract class BaseViewsAdapter<T, VB : ViewBinding>(private var list: List<T>) 
     }
 
     open fun areItemTheSame(oldItem: T, newItem: T) = oldItem?.equals(newItem) == true
+    fun hi() {}
 
     open fun areContentTheSame(oldItem: T, newItem: T) = oldItem?.equals(newItem) == true
 
