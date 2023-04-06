@@ -31,6 +31,7 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addCallBack()
+        (activity as HomeActivity).bottomNavView(true)
     }
 
     private fun addCallBack() {
@@ -48,7 +49,6 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
     }
 
     private fun setUp() {
-        (activity as HomeActivity).bottomNavView(true)
         adapter = RankAdapter(DataManager.getAllCategory(), this)
     }
 

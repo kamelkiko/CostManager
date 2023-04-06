@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".logic.ui.chart.ChartFragment">
+    tools:context=".logic.ui.seemore.SeeMoreFragment"
+    android:background="@color/white">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_chart"
+        android:id="@+id/toolbar_see_more"
         style="@style/AppBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,19 +18,21 @@
         app:title="@string/signup" />
 
     <View
-        android:id="@+id/toolbar_stroke_chart"
+        android:id="@+id/toolbar_stroke_see_more"
         style="@style/AppBarStroke"
         android:layout_marginBottom="@dimen/margin_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_chart" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_see_more" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/bar_chart"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_see_more"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_stroke_chart" />
+        tools:listitem="@layout/item_search"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_stroke_see_more"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
