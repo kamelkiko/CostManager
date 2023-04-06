@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    app:layoutDescription="@xml/fragment_rank_scene"
     tools:context=".logic.ui.rank.RankFragment">
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/rank_image"
-        android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/search_city"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/rankImage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_rank"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_x_large"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_medium"
         android:orientation="vertical"
         android:paddingStart="@dimen/padding_medium"
         android:visibility="visible"
@@ -31,9 +19,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rank_image"
+        app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
         tools:listitem="@layout/item_rank" />
 
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

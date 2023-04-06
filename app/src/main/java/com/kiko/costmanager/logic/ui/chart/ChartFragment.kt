@@ -97,7 +97,7 @@ class ChartFragment : BaseFragment<FragmentChartBinding>() {
                 DataManager.getAllInteracts().getAverageSalaryCityName().forEach {
                     list.add(
                         PieEntry(
-                            DataManager.getAllInteracts().getAverageSalaryNumber(it)!!,
+                            DataManager.getAllInteracts().getAverageSalaryNumber(it),
                             it
                         )
                     )
@@ -120,7 +120,7 @@ class ChartFragment : BaseFragment<FragmentChartBinding>() {
                 DataManager.getAllInteracts().getCitiesInternetName().forEach {
                     list.add(
                         PieEntry(
-                            DataManager.getAllInteracts().getCitiesInternetNumber(it)!!,
+                            DataManager.getAllInteracts().getCitiesInternetNumber(it),
                             it
                         )
                     )

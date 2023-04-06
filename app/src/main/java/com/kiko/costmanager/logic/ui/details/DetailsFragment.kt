@@ -31,7 +31,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
             DataManager.getAllInteracts().getCitiesDrinkNumber(city.cityName)
                 .let { Prices(Constants.ImageUrl.DRINKS, "Average of drinks", it) },
             DataManager.getAllInteracts().getCitiesFruitNumber(city.cityName)
-                .let { Prices(Constants.ImageUrl.FRUITS, "Average of fruits", it) },
+            .let { Prices(Constants.ImageUrl.FRUITS, "Average of fruits", it) },
             DataManager.getAllInteracts().getCitiesFoodNumber(city.cityName)
                 .let { Prices(Constants.ImageUrl.FOODS, "Average of foods", it) },
             DataManager.getAllInteracts().getCitiesServicesNumber(city.cityName)
@@ -45,10 +45,11 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
             DataManager.getAllInteracts().getCitiesRealStateNumber(city.cityName)
                 .let { Prices(Constants.ImageUrl.REAL_STATES, "Average of states", it) },
             DataManager.getAllInteracts().getAverageSalaryNumber(city.cityName)
-                ?.let { Prices(Constants.ImageUrl.SALARIES, "Average of salaries", it) },
+                .let { Prices(Constants.ImageUrl.SALARIES, "Average of salaries", it) },
             DataManager.getAllInteracts().getCitiesInternetNumber(city.cityName)
-                ?.let { Prices(Constants.ImageUrl.INTERNET, "Average of internet", it) },
+                .let { Prices(Constants.ImageUrl.INTERNET, "Average of internet", it) },
         )
+
         adapter = DetailsAdapter(list)
         binding.recycleDetails.adapter = adapter
         binding.imageDetails.setImageUrl(city.image)

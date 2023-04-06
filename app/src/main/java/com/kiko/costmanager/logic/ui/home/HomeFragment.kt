@@ -77,6 +77,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeInteractionListene
             replace(R.id.fragment_container, DetailsFragment.newInstance(cityEntity.id))
             addToBackStack(null)
             setReorderingAllowed(true)
+            (activity as HomeActivity).bottomNavView(false)
         }
     }
 

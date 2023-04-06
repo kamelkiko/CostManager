@@ -21,7 +21,7 @@ class Interacts(private val dataManager: DataManager) {
     fun getAverageSalaryNumber(city: String) =
         dataManager.getAllCitiesData()
             .first { it.cityName.lowercase() == city.lowercase() }
-            .averageMonthlyNetSalaryAfterTax
+            .averageMonthlyNetSalaryAfterTax ?: 0f
 
     fun getCitiesHasDataQuality() =
         dataManager.getAllCitiesData().filter { it.dataQuality }
@@ -41,8 +41,11 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesInternetNumber(city: String) =
-        dataManager.getAllCitiesData().first { it.cityName.lowercase() == city.lowercase() }
-            .servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl
+        dataManager.getAllCitiesData()
+            .filter(::excludeNullSalariesAndNullInternetPrices)
+            .sortedBy(::calculateThePercentageBetweenSalaryAndInternetPrice)
+            .first { it.cityName.lowercase() == city.lowercase() }
+            .servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl ?: 0f
 
 
     fun getCitiesMealName() =
@@ -56,20 +59,41 @@ class Interacts(private val dataManager: DataManager) {
         dataManager.getAllCitiesData()
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.mealsPrices.mealInexpensiveRestaurant!! + it.mealsPrices.mealFor2PeopleMidRangeRestaurant!! +
-                        it.mealsPrices.mealAtMcDonaldSOrEquivalent!!)
-            }.first()
+                (it.mealsPrices.mealFor2PeopleMidRangeRestaurant?.let { it1 ->
+                    it.mealsPrices.mealAtMcDonaldSOrEquivalent?.let { it2 ->
+                        it.mealsPrices.mealInexpensiveRestaurant?.plus(
+                            it1
+                        )?.plus(it2)
+                    }
+                })?.div(3f)
+            }.first() ?: 0f
 
     fun getCitiesDrinkNumber(city: String) =
         dataManager.getAllCitiesData()
+            .filter(::excludeNullDrinks)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.drinksPrices.cappuccinoRegularInRestaurants!! +
-                        it.drinksPrices.milkRegularOneLiter!! +
-                        it.drinksPrices.cokePepsiAThirdOfLiterBottleInRestaurants!! +
-                        it.drinksPrices.waterAThirdOfLiterBottleInRestaurants!! +
-                        it.drinksPrices.waterOneAndHalfLiterBottleAtTheMarket!!)
-            }.first()
+                (it.drinksPrices.waterOneAndHalfLiterBottleAtTheMarket?.let { it1 ->
+                    it.drinksPrices.waterAThirdOfLiterBottleInRestaurants?.plus(
+                        it1
+                    )?.let { it2 ->
+                        it.drinksPrices.cokePepsiAThirdOfLiterBottleInRestaurants?.plus(
+                            it2
+                        )?.let { it3 ->
+                            it.drinksPrices.milkRegularOneLiter?.plus(
+                                it3
+                            )?.let { it1 ->
+                                it.drinksPrices.cappuccinoRegularInRestaurants?.plus(
+                                    it1
+                                )
+                            }
+                        }
+                    }
+                }
+
+
+                        )?.div(5f)
+            }.first() ?: 0f
 
 
     fun getCitiesDrinkName() =
@@ -82,14 +106,22 @@ class Interacts(private val dataManager: DataManager) {
         dataManager.getAllCitiesData()
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.fruitAndVegetablesPrices.apples1kg!! +
-                        it.fruitAndVegetablesPrices.banana1kg!! +
-                        it.fruitAndVegetablesPrices.lettuceOneHead!! +
-                        it.fruitAndVegetablesPrices.onion1kg!! +
-                        it.fruitAndVegetablesPrices.oranges1kg!! +
-                        it.fruitAndVegetablesPrices.potato1kg!! +
-                        it.fruitAndVegetablesPrices.tomato1kg!!)
-            }.first()
+                (it.fruitAndVegetablesPrices.banana1kg?.let { it1 ->
+                    it.fruitAndVegetablesPrices.lettuceOneHead?.let { it2 ->
+                        it.fruitAndVegetablesPrices.onion1kg?.let { it3 ->
+                            it.fruitAndVegetablesPrices.oranges1kg?.let { it4 ->
+                                it.fruitAndVegetablesPrices.potato1kg?.let { it5 ->
+                                    it.fruitAndVegetablesPrices.tomato1kg?.let { it6 ->
+                                        it.fruitAndVegetablesPrices.apples1kg?.plus(
+                                            it1
+                                        )?.plus(it2)?.plus(it3)?.plus(it4)?.plus(it5)?.plus(it6)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })?.div(7f)
+            }.first() ?: 0f
 
 
     fun getCitiesFruitName() =
@@ -100,15 +132,25 @@ class Interacts(private val dataManager: DataManager) {
 
     fun getCitiesFoodNumber(city: String) =
         dataManager.getAllCitiesData()
+            .filter(::excludeNullFood)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.foodPrices.chickenFillets1kg!! +
-                        it.foodPrices.eggsRegular12!! +
-                        it.foodPrices.localCheese1kg!! +
-                        it.foodPrices.riceWhite1kg!! +
-                        it.foodPrices.loafOfFreshWhiteBread500g!! +
-                        it.foodPrices.beefRound1kgOrEquivalentBackLegRedMeat!!)
-            }.first()
+                (it.foodPrices.eggsRegular12?.let { it1 ->
+                    it.foodPrices.localCheese1kg?.let { it2 ->
+                        it.foodPrices.riceWhite1kg?.let { it3 ->
+                            it.foodPrices.loafOfFreshWhiteBread500g?.let { it4 ->
+                                it.foodPrices.beefRound1kgOrEquivalentBackLegRedMeat?.let { it5 ->
+                                    it.foodPrices.chickenFillets1kg?.plus(it1)?.plus(
+                                        it2
+                                    )?.plus(it3)?.plus(it4)?.plus(
+                                        it5
+                                    )
+                                }
+                            }
+                        }
+                    }
+                })?.div(6f)
+            }.first() ?: 0f
 
 
     fun getCitiesFoodName() =
@@ -136,18 +178,40 @@ class Interacts(private val dataManager: DataManager) {
 
     fun getCitiesServicesNumber(city: String) =
         dataManager.getAllCitiesData()
+            .filter(::excludeNullServices)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl!! +
-                        it.servicesPrices.basicElectricityHeatingCoolingWaterGarbageFor85m2Apartment!! +
-                        it.servicesPrices.cinemaInternationalReleaseOneSeat!! +
-                        it.servicesPrices.fitnessClubMonthlyFeeForOneAdult!! +
-                        it.servicesPrices.internationalPrimarySchoolYearlyForOneChild!! +
-                        it.servicesPrices.oneMinOfPrepaidMobileTariffLocalNoDiscountsOrPlans!! +
-                        it.servicesPrices.preschoolOrKindergartenFullDayPrivateMonthlyForOneChild!! +
-                        it.servicesPrices.tennisCourtRentOneHourOnWeekend!!
-                        )
-            }.first()
+                (it.servicesPrices.basicElectricityHeatingCoolingWaterGarbageFor85m2Apartment?.let { it1 ->
+                    it.servicesPrices.cinemaInternationalReleaseOneSeat?.let { it2 ->
+                        it.servicesPrices.fitnessClubMonthlyFeeForOneAdult?.let { it3 ->
+                            it.servicesPrices.internationalPrimarySchoolYearlyForOneChild?.let { it4 ->
+                                it.servicesPrices.oneMinOfPrepaidMobileTariffLocalNoDiscountsOrPlans?.let { it5 ->
+                                    it.servicesPrices.preschoolOrKindergartenFullDayPrivateMonthlyForOneChild?.let { it6 ->
+                                        it.servicesPrices.tennisCourtRentOneHourOnWeekend?.let { it7 ->
+                                            it.servicesPrices.internet60MbpsOrMoreUnlimitedDataCableAdsl?.plus(
+                                                it1
+                                            )?.plus(
+                                                it2
+                                            )?.plus(
+                                                it3
+                                            )?.plus(
+                                                it4
+                                            )?.plus(
+                                                it5
+                                            )?.plus(
+                                                it6
+                                            )?.plus(
+                                                it7
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                        )?.div(8)
+            }.first() ?: 0f
 
 
     fun getCitiesServicesName() =
@@ -178,15 +242,24 @@ class Interacts(private val dataManager: DataManager) {
 
 
     fun getCitiesClothesNumber(city: String) =
-        dataManager.getAllCitiesData()
+        dataManager.getAllCitiesData().filter(::excludeNullClothes)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.clothesPrices.onePairOfJeansLevis50oneOrSimilar!! +
-                        it.clothesPrices.onePairOfMenLeatherBusinessShoes!! +
-                        it.clothesPrices.onePairOfNikeRunningShoesMidRange!! +
-                        it.clothesPrices.oneSummerDressInAChainStoreZaraHAndM!!
-                        )
-            }.first()
+                (it.clothesPrices.onePairOfMenLeatherBusinessShoes?.let { it1 ->
+                    it.clothesPrices.onePairOfNikeRunningShoesMidRange?.let { it2 ->
+                        it.clothesPrices.oneSummerDressInAChainStoreZaraHAndM?.let { it3 ->
+                            it.clothesPrices.onePairOfJeansLevis50oneOrSimilar?.plus(
+                                it1
+                            )?.plus(
+                                it2
+                            )?.plus(
+                                it3
+                            )
+                        }
+                    }
+                }
+                        )?.div(4)
+            }.first() ?: 0f
 
 
     fun getCitiesClothesName() =
@@ -218,17 +291,32 @@ class Interacts(private val dataManager: DataManager) {
                 && city.fruitAndVegetablesPrices.tomato1kg != null
 
     fun getCitiesTransNumber(city: String) =
-        dataManager.getAllCitiesData()
+        dataManager.getAllCitiesData().filter(::excludeNullTrans)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.transportationsPrices.gasolineOneLiter!! +
-                        it.transportationsPrices.monthlyPassRegularPrice!! +
-                        it.transportationsPrices.oneWayTicketLocalTransport!! +
-                        it.transportationsPrices.taxi1kmNormalTariff!! +
-                        it.transportationsPrices.taxiStartNormalTariff!! +
-                        it.transportationsPrices.taxi1hourWaitingNormalTariff!!
-                        )
-            }.first()
+                (it.transportationsPrices.monthlyPassRegularPrice?.let { it1 ->
+                    it.transportationsPrices.oneWayTicketLocalTransport?.let { it2 ->
+                        it.transportationsPrices.taxi1kmNormalTariff?.let { it3 ->
+                            it.transportationsPrices.taxiStartNormalTariff?.let { it4 ->
+                                it.transportationsPrices.taxi1hourWaitingNormalTariff?.let { it5 ->
+                                    it.transportationsPrices.gasolineOneLiter?.plus(
+                                        it1
+                                    )?.plus(
+                                        it2
+                                    )?.plus(
+                                        it3
+                                    )?.plus(
+                                        it4
+                                    )?.plus(
+                                        it5
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+                        )?.div(6f)
+            }.first() ?: 0f
 
     fun getCitiesTransName() =
         dataManager.getAllCitiesData().asSequence().filter(::excludeNullTrans)
@@ -254,13 +342,15 @@ class Interacts(private val dataManager: DataManager) {
                 && city.transportationsPrices.taxi1hourWaitingNormalTariff != null
 
     fun getCitiesCarNumber(city: String) =
-        dataManager.getAllCitiesData()
+        dataManager.getAllCitiesData().filter(::excludeNullCars)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.carsPrices.toyotaCorollaSedan_1_6l_97kwComfortOrEquivalentNewCar!! +
-                        it.carsPrices.volkswagenGolf_1_4_90kwTrendLineOrEquivalentNewCar!!
-                        )
-            }.first()
+                (it.carsPrices.volkswagenGolf_1_4_90kwTrendLineOrEquivalentNewCar?.let { it1 ->
+                    it.carsPrices.toyotaCorollaSedan_1_6l_97kwComfortOrEquivalentNewCar?.plus(
+                        it1
+                    )
+                })?.div(2f)
+            }.first() ?: 0f
 
     fun getCitiesCarName() =
         dataManager.getAllCitiesData().asSequence().filter(::excludeNullCars)
@@ -278,17 +368,32 @@ class Interacts(private val dataManager: DataManager) {
                 && city.carsPrices.volkswagenGolf_1_4_90kwTrendLineOrEquivalentNewCar != null
 
     fun getCitiesRealStateNumber(city: String) =
-        dataManager.getAllCitiesData()
+        dataManager.getAllCitiesData().filter(::excludeNullStates)
             .filter { it.cityName.lowercase() == city.lowercase() }
             .map {
-                (it.realEstatesPrices.apartment3BedroomsInCityCentre!! +
-                        it.realEstatesPrices.apartment3BedroomsOutsideOfCentre!! +
-                        it.realEstatesPrices.apartmentOneBedroomInCityCentre!! +
-                        it.realEstatesPrices.pricePerSquareMeterToBuyApartmentInCityCentre!! +
-                        it.realEstatesPrices.apartmentOneBedroomOutsideOfCentre!! +
-                        it.realEstatesPrices.pricePerSquareMeterToBuyApartmentOutsideOfCentre!!
-                        )
-            }.first()
+                (it.realEstatesPrices.pricePerSquareMeterToBuyApartmentOutsideOfCentre?.let { it1 ->
+                    it.realEstatesPrices.apartmentOneBedroomOutsideOfCentre?.let { it2 ->
+                        it.realEstatesPrices.pricePerSquareMeterToBuyApartmentInCityCentre?.let { it3 ->
+                            it.realEstatesPrices.apartmentOneBedroomInCityCentre?.let { it4 ->
+                                it.realEstatesPrices.apartment3BedroomsOutsideOfCentre?.let { it5 ->
+                                    it.realEstatesPrices.apartment3BedroomsInCityCentre?.plus(
+                                        it5
+                                    )?.plus(
+                                        it4
+                                    )?.plus(
+                                        it3
+                                    )?.plus(
+                                        it2
+                                    )?.plus(
+                                        it1
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+                        )?.div(6f)
+            }.first() ?: 0f
 
     fun getCitiesRealStateName() =
         dataManager.getAllCitiesData().asSequence().filter(::excludeNullStates)
