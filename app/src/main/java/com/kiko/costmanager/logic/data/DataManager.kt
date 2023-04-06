@@ -42,4 +42,6 @@ object DataManager {
             it.cityName.lowercase().contains(name.lowercase()) ||
                     it.country.lowercase().contains(name.lowercase())
         }
+
+    fun getCityById(id: Int) = getAllCitiesData().filter { it.id == id }
 }
