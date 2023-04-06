@@ -26,9 +26,11 @@
     <string name="delete">Delete your account</string>
     <string name="you_need_support_contact_us">You need support? Contact Us</string>
     <string name="here_you_can_add_your_favourite_recieps">Here you can add your favourite cities</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="details">Details</string>
     <string name="imagedescription">imageDescription</string>
     <string name="popular_cities">Popular cities</string>
+    <string name="data_quality">Cities has dataQuality</string>
+    <string name="perfect_internet">Perfect internet</string>
+    <string name="just_for_you">Just for you</string>
+    <string name="perfect_salaries">Perfect Salaries</string>
 </resources>

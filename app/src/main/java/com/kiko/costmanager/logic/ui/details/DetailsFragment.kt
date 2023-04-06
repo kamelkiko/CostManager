@@ -26,6 +26,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         adapter = DetailsAdapter(DataManager.getCityById(id!!))
         binding.recycleDetails.adapter = adapter
         binding.imageDetails.setImageUrl(DataManager.getCityById(id)[0].image)
+        binding.toolbarDetails.title = DataManager.getCityById(id)[0].cityName
     }
 
     private fun addCallBack() {

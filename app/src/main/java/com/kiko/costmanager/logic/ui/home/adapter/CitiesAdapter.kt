@@ -14,9 +14,9 @@ class CitiesAdapter(list: List<CityEntity>, private val listener: HomeInteractio
 
     override fun bindItems(holder: BaseViewHolder, position: Int, item: CityEntity) {
         holder.binding.apply {
-            textCity.text = item.cityName
-            textCountry.text = item.country
-            imageCity.setImageUrl(item.image)
+            imageCityCard.setImageUrl("https://images.pexels.com/photos/1486222/pexels-photo-1486222.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+            textCityCard.text = item.cityName
+            textCountryCard.text = item.country
             root.setOnClickListener { listener.onClickItem(item) }
         }
     }

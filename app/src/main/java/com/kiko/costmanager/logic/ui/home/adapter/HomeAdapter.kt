@@ -3,13 +3,11 @@ package com.kiko.costmanager.logic.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
 import com.kiko.costmanager.databinding.*
 import com.kiko.costmanager.logic.ui.Base.BaseNestedViewAdapter
 import com.kiko.costmanager.logic.ui.home.HomeItem
 
-class HomeAdapter(private var list: List<HomeItem>, private val listener: HomeInteractionListener) :
+class HomeAdapter(list: List<HomeItem>, private val listener: HomeInteractionListener) :
     BaseNestedViewAdapter<HomeItem, ViewBinding>(list) {
     override fun createBinding(
         inflater: LayoutInflater,
@@ -63,13 +61,7 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: HomeIn
 
     private fun bindBanner(binding: ItemBannerBinding, item: HomeItem.Banner) {
         binding.apply {
-            val imageSliders = ArrayList<SlideModel>()
-            imageSliders.add(SlideModel(PARIS, "Paris", ScaleTypes.CENTER_CROP))
-            imageSliders.add(SlideModel(ROME, "Rome", ScaleTypes.CENTER_CROP))
-            imageSliders.add(SlideModel(PORTO, "Porto", ScaleTypes.CENTER_CROP))
-            imageSliders.add(SlideModel(CAIRO, "Cairo", ScaleTypes.CENTER_CROP))
-            imageSliders.add(SlideModel(NEW_YORK, "NewYork", ScaleTypes.CENTER_CROP))
-            imageSlider.setImageList(imageSliders)
+            imageSlider.setImageList(item.list)
         }
     }
 
@@ -78,14 +70,14 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: HomeIn
         item: HomeItem.AverageSalariesCities
     ) {
         binding.apply {
-            recyclerSalary.adapter = CitiesAdapter(item.data, listener)
+            recyclerSalary.adapter = PopularCitiesAdapter(item.data, listener)
             seeMore.setOnClickListener { listener.onClickSeeMore(item.type) }
         }
     }
 
     private fun bindPopularCity(binding: ListPopularCityBinding, item: HomeItem.PopularCities) {
         binding.apply {
-            recyclerPopular.adapter = CitiesAdapter(item.data, listener)
+            recyclerPopular.adapter = PopularCitiesAdapter(item.data, listener)
         }
     }
 
@@ -94,7 +86,7 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: HomeIn
         item: HomeItem.AverageInternetCities
     ) {
         binding.apply {
-            recyclerInternet.adapter = CitiesAdapter(item.data, listener)
+            recyclerInternet.adapter = PopularCitiesAdapter(item.data, listener)
             seeMore.setOnClickListener { listener.onClickSeeMore(item.type) }
         }
     }
@@ -104,13 +96,13 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: HomeIn
         item: HomeItem.CitiesHaveDataQuality
     ) {
         binding.apply {
-            recyclerDataQuality.adapter = CitiesAdapter(item.data, listener)
+            recyclerDataQuality.adapter = PopularCitiesAdapter(item.data, listener)
             seeMore.setOnClickListener { listener.onClickSeeMore(item.type) }
         }
     }
 
     private fun bindJustForYou(binding: ListJustForYouBinding, item: HomeItem.JustForYou) {
-        binding.recyclerJustForYou.adapter = CitiesAdapter(item.data, listener)
+        binding.recyclerJustForYou.adapter = PopularCitiesAdapter(item.data, listener)
         binding.seeMore.setOnClickListener { listener.onClickSeeMore(item.type) }
     }
 

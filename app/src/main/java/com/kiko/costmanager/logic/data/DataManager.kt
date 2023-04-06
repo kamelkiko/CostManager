@@ -2,6 +2,7 @@ package com.kiko.costmanager.logic.data
 
 import com.kiko.costmanager.logic.data.models.Category
 import com.kiko.costmanager.logic.data.models.CityEntity
+import com.kiko.costmanager.logic.interactors.Interacts
 import com.kiko.costmanager.logic.util.Constants
 
 object DataManager {
@@ -14,27 +15,25 @@ object DataManager {
         cities.clear()
     }
 
-    fun getAllCitiesData() = cities
+    fun getAllInteracts() = Interacts(this)
+
+    fun getAllCitiesData() = cities.toList()
 
     fun getAllCategory() =
         listOf(
-            Category(0, "Meals", Constants.ImageUrl.MEALS),
-            Category(1, "Drinks", Constants.ImageUrl.DRINKS),
-            Category(2, "Fruits", Constants.ImageUrl.FRUITS),
-            Category(3, "Foods", Constants.ImageUrl.FOODS),
-            Category(4, "Service", Constants.ImageUrl.SERVICES),
-            Category(5, "Clothes", Constants.ImageUrl.CLOTHES),
-            Category(6, "Transportations", Constants.ImageUrl.TRANSPORTATIONS),
-            Category(7, "Cars", Constants.ImageUrl.CARS),
-            Category(8, "RealEstates", Constants.ImageUrl.REAL_STATES),
-            Category(9, "Salaries", Constants.ImageUrl.SALARIES),
-            Category(10, "Internet", Constants.ImageUrl.INTERNET),
+            Category(0, Constants.MEALS, Constants.ImageUrl.MEALS),
+            Category(1, Constants.DRINKS, Constants.ImageUrl.DRINKS),
+            Category(2, Constants.FRUITS, Constants.ImageUrl.FRUITS),
+            Category(3, Constants.FOODS, Constants.ImageUrl.FOODS),
+            Category(4, Constants.SERVICES, Constants.ImageUrl.SERVICES),
+            Category(5, Constants.CLOTHES, Constants.ImageUrl.CLOTHES),
+            Category(6, Constants.TRANS, Constants.ImageUrl.TRANSPORTATIONS),
+            Category(7, Constants.CARS, Constants.ImageUrl.CARS),
+            Category(8, Constants.STATES, Constants.ImageUrl.REAL_STATES),
+            Category(9, Constants.SALARIES, Constants.ImageUrl.SALARIES),
+            Category(10, Constants.INTERNET, Constants.ImageUrl.INTERNET),
         )
 
-//    fun getAllPrices(cityEntity: CityEntity): Prices {
-//    return listOf(
-//        Prices("Average Meals",cityEntity.mealsPrices)
-//    }
 
     fun searchInCategory(categoryName: String) =
         getAllCategory().filter {
@@ -48,4 +47,5 @@ object DataManager {
         }
 
     fun getCityById(id: Int) = getAllCitiesData().filter { it.id == id }
+
 }

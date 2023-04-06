@@ -1,12 +1,13 @@
 package com.kiko.costmanager.logic.ui.home
 
 
+import com.denzcoskun.imageslider.models.SlideModel
 import com.kiko.costmanager.logic.data.models.CityEntity
 
 
 sealed class HomeItem {
     data class Banner(
-        val data: String,
+        val list:List<SlideModel>,
         val type: HomeItemType = HomeItemType.BANNER
     ) : HomeItem()
 

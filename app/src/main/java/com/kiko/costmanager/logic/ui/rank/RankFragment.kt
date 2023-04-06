@@ -55,7 +55,7 @@ class RankFragment : BaseFragment<FragmentRankBinding>(), RankInteractListener {
     override fun onClickItem(category: Category) {
         (activity as HomeActivity).bottomNavView(false)
         parentFragmentManager.commit {
-            replace(R.id.fragment_container, ChartFragment())
+            replace(R.id.fragment_container, ChartFragment.newInstance(category.categoryName))
             addToBackStack(null)
             setReorderingAllowed(true)
         }

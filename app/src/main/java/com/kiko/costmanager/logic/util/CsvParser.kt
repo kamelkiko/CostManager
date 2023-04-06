@@ -9,7 +9,7 @@ class CsvParser {
         return CityEntity(
             id = id,
             cityName = tokens[Constants.ColumnIndex.CITY],
-            image = Constants.ImageUrl.RANDOM_IMAGE_URL,
+            image = getRandomImage(),
             country = tokens[Constants.ColumnIndex.COUNTRY],
             mealsPrices = constructMealsPricesFromTokens(tokens),
             drinksPrices = constructDrinksPricesFromTokens(tokens),
@@ -122,7 +122,33 @@ class CsvParser {
         )
     }
 
-    private fun List<String>.getFloat(index: Int): Float? {
-        return this[index].toFloatOrNull()
+
+    private fun getRandomImage(): String {
+        return listOf(
+            "https://images.unsplash.com/photo-1608925086961-dbcd276a0e71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=383&q=80",
+            "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            "https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=753&q=80",
+            "https://images.unsplash.com/photo-1558642084-fd07fae5282e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
+            "https://images.unsplash.com/photo-1602941889598-3e7780b9a602?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
+            "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            "https://images.unsplash.com/photo-1572704956971-74e41e37d1b8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+            "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1199&q=80",
+            "https://plus.unsplash.com/premium_photo-1677934308187-26e8103c292b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+            "https://images.unsplash.com/photo-1530276371031-2511efff9d5a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8U3lkbmV5JTIwSGFyYm91ciUyMEJyaWRnZSUyQyUyMFN5ZG5leSUyQyUyMEF1c3RyYWxpYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+            "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1830&q=80",
+            "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            "https://images.unsplash.com/photo-1595277914958-7f384e3d3347?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
+            "https://images.unsplash.com/photo-1626215039499-2d0e58588665?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80",
+            "https://images.unsplash.com/photo-1630491732980-318d54825436?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1917&q=80",
+            "https://images.unsplash.com/photo-1573529034457-3a81a2db5576?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+            "https://media.istockphoto.com/id/1455303240/photo/london-big-ben-tower-westminster-bridge-over-thames-river-england-uk.jpg?s=612x612&w=0&k=20&c=pIRtFOJoT6OcN5pAgwq38TzqJ8bNcFKd0rD7Mk5aOps=",
+            "https://images.unsplash.com/photo-1616169610185-62da73d4f889?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80",
+            "https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=867&q=80",
+            "https://media.istockphoto.com/id/927714156/photo/spain-square-is-a-square-in-the-maria-luisa-park-in-seville.jpg?s=612x612&w=0&k=20&c=Wv-RCpTKlmubYgLibbbfxsjgJIYUDlU-_hJ65-eDALM=",
+
+            ).shuffled().first()
     }
+
+
 }

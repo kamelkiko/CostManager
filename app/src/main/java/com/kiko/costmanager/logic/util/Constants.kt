@@ -82,4 +82,15 @@ object Constants {
     }
 
     const val KEY = "KEY"
+    const val MEALS = "Meals"
+    const val DRINKS = "Drinks"
+    const val FRUITS = "Fruits"
+    const val FOODS = "Foods"
+    const val SERVICES = "Services"
+    const val CLOTHES = "Clothes"
+    const val TRANS = "Transportations"
+    const val CARS = "Cars"
+    const val STATES = "States"
+    const val SALARIES = "Salaries"
+    const val INTERNET = "Internet"
 }
