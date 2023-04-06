@@ -11,10 +11,10 @@ import androidx.fragment.app.commitNow
 import com.kiko.costmanager.R
 import com.kiko.costmanager.databinding.ActivityHomeBinding
 import com.kiko.costmanager.logic.data.DataManager
-import com.kiko.costmanager.logic.ui.chart.ChartFragment
 import com.kiko.costmanager.logic.ui.home.HomeFragment
 import com.kiko.costmanager.logic.ui.login.LoginFragment
 import com.kiko.costmanager.logic.ui.onboarding.OnBoardingFragment
+import com.kiko.costmanager.logic.ui.profile.ProfileFragment
 import com.kiko.costmanager.logic.ui.rank.RankFragment
 import com.kiko.costmanager.logic.ui.search.SearchFragment
 import com.kiko.costmanager.logic.util.CsvParser
@@ -108,7 +108,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    setFragment(ChartFragment(), TAG_PROFILE_FRAGMENT)
+                    setFragment(ProfileFragment(), TAG_PROFILE_FRAGMENT)
                     true
                 }
                 else -> {

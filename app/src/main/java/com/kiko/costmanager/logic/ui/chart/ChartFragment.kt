@@ -23,6 +23,13 @@ class ChartFragment : BaseFragment<FragmentChartBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup()
+        addCallBack()
+    }
+
+    private fun addCallBack() {
+        binding.toolbarChart.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun setup() {
